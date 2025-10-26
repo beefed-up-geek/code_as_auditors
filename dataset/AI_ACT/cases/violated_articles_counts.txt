@@ -1,0 +1,4 @@
+Article 2: 359
+Article 3: 232
+Article 5: 1081
+Article 22: 143
