@@ -1,0 +1,502 @@
+[
+  {
+    "variable": "transfers_overseas",
+    "question": "귀사는 고객 개인정보를 해외(예: 해외 서버, 해외 본사, 해외 협력업체 등)로 전송하거나 저장하는 과정이 있습니까?"
+  },
+  {
+    "variable": "received_consent",
+    "question": "귀사는 고객의 개인정보를 수집하거나 이용하기 전에, 수집 목적·항목·보유기간 등을 명확히 안내하고 명시적 동의를 받았습니까?"
+  },
+  {
+    "variable": "BUSINESS_DISPOSES_PERSONAL_DATA",
+    "question": "귀사는 개인정보를 파기할 예정이거나 파기한 경험이 있습니까?"
+  },
+  {
+    "variable": "DETAILED_DISPOSAL_METHODS",
+    "question": "귀사는 개인정보를 파기할 때, 전자적 파일은 복원이 불가능한 방법으로 영구 삭제하거나 기술적 특성상 어렵다면 법 제58조의2에 따라 복원 불가능하도록 조치하며, 그 외 기록물은 파쇄 또는 소각합니까?"
+  },
+  {
+    "variable": "raise_exception",
+    "question": "귀사는 전자적 파일 형태의 개인정보를 처리할 때, 기술적 특성으로 인해 영구 삭제가 어려울 경우, 이 정보를 법 제58조의2에 해당하는 정보로 처리하여 복원이 불가능하도록 조치하고 있습니까?"
+  },
+  {
+    "variable": "handling_electronic_files",
+    "question": "귀사는 현재 전자적 파일 형태의 개인정보를 처리하고 있습니까?"
+  },
+  {
+    "variable": "PHYSICAL_DISPOSAL_METHODS_COMPLIANT",
+    "question": "귀사는 기록물, 인쇄물, 서면, 그 밖의 기록매체의 개인정보를 파기할 때 파쇄 또는 소각하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_CONDUCTS_PROCESSING_WITH_CONSENT",
+    "question": "귀사는 개인정보 처리 활동을 수행하기 위해 정보주체의 동의를 받고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_ALLOW_FREE_CONSENT_DECISION",
+    "question": "귀사는 고객이 자유로운 의사에 따라 개인정보 제공 여부를 결정할 수 있도록 보장하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_CONSENT_SPECIFIC_AND_CLEAR",
+    "question": "귀사는 고객의 개인정보 처리에 대한 동의를 받을 때 그 내용을 구체적이고 명확하게 제시하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_CONSENT_TEXT_EASILY_UNDERSTANDABLE",
+    "question": "귀사는 고객으로부터 개인정보 처리에 대한 동의를 받는 문구가 쉽게 읽고 이해될 수 있도록 명확하고 간결합니까?"
+  },
+  {
+    "variable": "BUSINESS_PROVIDES_CLEAR_CONSENT_METHOD",
+    "question": "귀사는 고객이 개인정보 처리에 대한 동의 여부를 명확하게 표시할 수 있는 방법을 제공하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_USES_WRITTEN_CONSENT_METHOD",
+    "question": "귀사는 개인정보 처리에 대해 고객으로부터 서면 형태로 명시된 동의내용을 우편이나 팩스를 통해 전달받고, 이를 고객이 서명하거나 날인하여 반환하는 방식으로 동의를 받고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_SOLICITS_CONSENT_VIA_PHONE",
+    "question": "귀사는 고객에게 전화 통화를 통해 개인정보 처리 동의를 요구하거나 설명하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_PHONE_NOTIFICATION_CLARITY",
+    "question": "귀사는 전화로 고객에게 동의 내용을 설명할 때, 고객이 이해하기 쉽게 명확하게 설명하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_CONFIRM_EXPLICIT_PHONE_CONSENT",
+    "question": "귀사는 전화 통화 후 고객으로부터 명시적인 동의 의사표시를 확인하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_PROVIDES_ONLINE_CONSENT",
+    "question": "귀사는 고객에게 인터넷 홈페이지 등을 통해 개인정보 처리 동의 내용을 게재하고, 고객이 그 동의 여부를 표시할 수 있도록 하는 방법을 사용하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_ONLINE_CONSENT_IS_CLEAR",
+    "question": "귀사는 온라인을 통해 개인정보 처리에 대한 동의를 받을 때, 고객이 그 내용을 명확히 이해하고 동의 여부를 표시할 수 있도록 명확하게 안내하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_IS_PROCESSING_PERSONAL_INFORMATION",
+    "question": "귀사는 고객의 개인정보를 처리하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_OBTAINS_CONSENT_VIA_EMAIL",
+    "question": "귀사는 동의 내용을 전자우편으로 발송하고, 고객으로부터 동의의 의사표시가 적힌 전자우편을 받는 방법으로 동의를 받고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_USES_EQUIVALENT_CONSENT_METHOD",
+    "question": "귀사는 고객으로부터 동의의 의사표시를 확인할 때, 법 제17조 제2항 제1호부터 제5호까지의 규정과 동등한 수준으로 동의 내용을 알리고 확인할 수 있는 방법을 사용하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_INFORMS_CONTACT_FOR_MARKETING",
+    "question": "귀사는 고객의 개인정보를 재화나 서비스의 홍보 또는 판매 권유 등의 목적으로 사용하여 연락할 수 있음을 고객에게 명확히 알리고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_PROCESSES_SENSITIVE_INFO",
+    "question": "귀사는 민감정보(예. 인종, 건강정보 등)를 처리하고 있습니까?"
+  },
+  {
+    "variable": "business_inform_storage_use_period",
+    "question": "귀사는 개인정보 처리 시 개인정보의 보유 및 이용 기간을 정보주체에게 명확히 안내하고 있습니까? (제공 시에는 제공받는 자의 보유 및 이용 기간도 안내)"
+  },
+  {
+    "variable": "BUSINESS_INFORMS_DATA_RECIPIENT_PURPOSE_OF_USE",
+    "question": "귀사는 개인정보를 제3자에게 제공할 때 받을 쪽의 개인정보 이용 목적을 고객에게 명확히 안내하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_INFORMS_CONSENT_METHOD",
+    "question": "귀사는 개인정보 처리에 있어, 고객에게 서면, 전자우편, 팩스, 전화, 문자전송 또는 이에 상응하는 방법으로 개인정보 처리방법 및 내용을 알려주고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_IS_SECTOR_GOVERNED",
+    "question": "귀사는 중앙행정기관의 소관 분야에 속하여 개인정보 처리 방식에 관한 특정 지침을 따르는 것이 권장됩니까?"
+  },
+  {
+    "variable": "BUSINESS_PROCESSES_UNIQUE_IDENTIFIERS",
+    "question": "귀사는 법령이나 지침에 따라 고유식별정보(예: 주민등록번호, 여권번호 등)를 처리하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_IS_PUBLIC_AGENCY",
+    "question": "귀사는 법령에 따라 정부 산하의 공공기관으로 지정되어 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_HAS_HISTORY_OF_VIOLATIONS",
+    "question": "귀사는 개인정보 처리와 관련하여 법을 위반한 이력이 있으며, 그 내용과 정도가 문제가 되었습니까?"
+  },
+  {
+    "variable": "DATA_SUBJECTS_OVER_50000",
+    "question": "귀사는 5만 명 이상의 정보주체에 관한 고유식별정보를 처리하고 있습니까?"
+  },
+  {
+    "variable": "DATA_SUBJECTS_OVER_10000",
+    "question": "귀사는 1만 명 이상의 정보주체에 관한 고유식별정보를 처리하고 있는 공공기관입니까?"
+  },
+  {
+    "variable": "BUSINESS_HAS_DATA_CERTIFICATION",
+    "question": "귀사는 법 제32조의2에 따라 개인정보 보호 인증을 받았습니까?"
+  },
+  {
+    "variable": "ONGOING_EVALUATION_UNDER_OTHER_LAWS",
+    "question": "귀사는 「신용정보의 이용 및 보호에 관한 법률」 제45조의5에 따른 개인신용정보 활용ㆍ관리 실태에 대한 상시평가를 포함하여, 고유식별정보의 안전성 확보 조치 이행 여부에 대한 정기적인 점검을 다른 법률에 따라 받고 있습니까?"
+  },
+  {
+    "variable": "REQUESTED_BY_HEAD_OF_RELEVANT_AGENCY",
+    "question": "귀사는 관계 중앙행정기관의 장의 요청에 따라 고유식별정보 안전성 확보 조치에 대한 점검을 받고 있습니까?"
+  },
+  {
+    "variable": "RECOGNIZED_BY_COMMISION_AS_EQUIVALENT_TO_PHASE3_INSPECTION",
+    "question": "귀사의 고유식별정보 안전성 확보 조치 점검이 보호위원회에 의해 제21조 제3항에 따른 조사에 준하는 것으로 인정된 적이 있습니까?"
+  },
+  {
+    "variable": "submitted_materials",
+    "question": "귀사는 보호위원회로부터 요청받은 온라인 또는 서면 자료를 제출하였습니까?"
+  },
+  {
+    "variable": "BUSINESS_PROCESSES_RESIDENT_REGISTRATION_NUMBERS_ELECTRONICALLY",
+    "question": "귀사는 고객의 주민등록번호를 전자적인 방법으로 보관하고 있습니까?"
+  },
+  {
+    "variable": "DATA_SUBJECTS_UNDER_1000000",
+    "question": "귀사는 100만 명 미만의 정보주체에 관한 주민등록번호를 전자적으로 보관하고 있습니까?"
+  },
+  {
+    "variable": "ENCRYPTION_COMPLIANCE_BEFORE_2017",
+    "question": "귀사는 2017년 1월 1일 전까지 전자적으로 보관하는 주민등록번호에 대한 암호화를 완료하였습니까?"
+  },
+  {
+    "variable": "ENCRYPTION_COMPLIANCE_BEFORE_2018",
+    "question": "귀사는 2018년 1월 1일 전까지 전자적으로 보관하는 100만 명 이상의 고객 주민등록번호에 대한 암호화를 완료하였습니까?"
+  },
+  {
+    "variable": "BUSINESS_TEMPORARILY_PROCESSES_VIDEO_FOR_STATISTICS",
+    "question": "귀사는 출입자 수, 성별, 연령대 등의 통계값 또는 통계적 특성을 산출하기 위해 영상정보를 일시적으로 처리하고 있습니까?"
+  },
+  {
+    "variable": "similar_case_as_statistics_processing",
+    "question": "귀사는 출입자 수, 성별, 연령대 등 통계값 산출을 위한 처리와 유사한 목적으로 영상정보를 일시적으로 처리해야 하는 상황에 있습니까?"
+  },
+  {
+    "variable": "REVIEWED_AND_APPROVED_BY_PROTECTION_COMMISSION",
+    "question": "귀사는 개인정보 보호위원회의 심의 및 의결을 통해 특정 개인정보 처리의 적법성을 승인받았습니까?"
+  },
+  {
+    "variable": "BUSINESS_IS_OPERATING_PRESCRIBED_FACILITIES",
+    "question": "귀사는 교도소나 법으로 규정된 정신의료기관과 같은 시설을 운영하고 있습니까?"
+  },
+  {
+    "variable": "CENTRAL_MINISTRIES_ENCOURAGE_GUIDELINES_COMPLIANCE",
+    "question": "귀사는 개인정보 보호지침을 중앙행정기관이 권장하는 방식으로 준수하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_HAS_DATA_HANDLING_ENTITIES",
+    "question": "귀사는 고객의 개인정보 처리 업무를 외부 수탁자에게 위탁하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_LIMITS_PERSONAL_DATA_ACCESS_AND_SECURES",
+    "question": "귀사는 개인정보 처리 업무를 외부 수탁자에게 위탁할 때, 그 수탁자가 개인정보에 접근할 수 있는 권한을 제한하고 안전성 확보를 위한 조치를 수행하도록 하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_HAS_LIABILITY_ARRANGEMENTS_FOR_BREACHES",
+    "question": "귀사는 개인정보 처리 업무를 위탁한 수탁자가 법 규정을 위반하여 의무를 제대로 이행하지 않는 경우의 손해배상 및 책임에 관한 조치를 마련하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_DISPLAYS_DELEGATION_ON_WEBSITE",
+    "question": "귀사는 개인정보 처리 업무를 외부에 위탁하는 경우, 위탁하는 업무의 내용과 수탁자를 자사 인터넷 홈페이지에 지속적으로 게재하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_POSTS_DELEGATION_INFO_PHYSICALLY",
+    "question": "귀사는 위탁하는 업무의 내용과 수탁자를 사업장 등의 보기 쉬운 장소에 게시하여 공개하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_UTILIZES_OFFICIAL_PUBLICATIONS",
+    "question": "귀사는 공공기관으로서 관보나 주된 보급지역을 대상 지역으로 하는 일간지/주간신문 또는 인터넷신문에 위탁하는 업무의 내용과 수탁자를 게재하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_USES_PERIODICALS_FOR_DISCLOSURE",
+    "question": "귀사는 간행물, 소식지, 홍보지 또는 청구서 등에 위탁하는 업무의 내용과 수탁자를 포함하여 정보주체에게 지속적으로 배포하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_INCLUDES_DELEGATION_IN_CONTRACTS",
+    "question": "귀사는 재화나 서비스 제공을 위한 계약서 등에 위탁하는 업무의 내용과 수탁자를 명시하여 정보주체에게 발급하고 있습니까?"
+  },
+  {
+    "variable": "uses_written_method",
+    "question": "귀사는 재화 또는 서비스의 홍보나 판매 권유를 위탁할 때, 서면으로 위탁 내용과 수탁자를 정보주체에게 명확히 알리고 있습니까?"
+  },
+  {
+    "variable": "INTERNET_WEBSITE_AVAILABLE",
+    "question": "귀사는 온라인 홈페이지를 운영하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_WISHES_TO_TRANSFER_PERSONAL_DATA",
+    "question": "귀사는 영업 양도, 합병 등으로 개인정보를 다른 사업체에게 이전할 계획이 있습니까?"
+  },
+  {
+    "variable": "can_notify_data_subjects_by_written_method",
+    "question": "귀사는 서면 등의 방법으로 정보주체에게 개인정보 이전에 관한 사항을 알릴 수 있습니까?"
+  },
+  {
+    "variable": "can_use_website",
+    "question": "귀사는 인터넷 홈페이지를 통해 개인정보 이전 관련 사항을 30일 이상 게시할 수 있습니까?"
+  },
+  {
+    "variable": "POSTED_DELEGATION_INFO_PHYSICALLY_FOR_30_DAYS",
+    "question": "귀사는 개인정보 이전 관련 사항을 사업장의 보기 쉬운 장소에 30일 이상 게시하였습니까?"
+  },
+  {
+    "variable": "inform_data_subjects_via_offline_media",
+    "question": "귀사는 개인정보 이전 관련 사항을 사업장등 구역을 관리하는 신문법에 따른 일반일간신문 또는 인터넷신문을 통해 정보주체에게 알리고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_PROCESSES_PSEUDONYMOUS_DATA",
+    "question": "귀사는 가명정보(식별이 제거되었지만 복원이 가능한 데이터)를 처리하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_SEPARATELY_STORES_PSEUDONYMOUS_AND_ADDITIONAL_DATA",
+    "question": "귀사는 가명정보와 이를 복원하기 위한 추가 정보를 분리 보관하고 있습니까?"
+  },
+  {
+    "variable": "ADDITIONAL_DATA_IS_UNNECESSARY",
+    "question": "귀사는 가명정보 복원을 위한 추가 정보가 더 이상 필요하지 않다고 판단하였습니까?"
+  },
+  {
+    "variable": "ADDITIONAL_DATA_DESTROYED",
+    "question": "귀사는 불필요한 가명정보 복원을 위한 추가 정보를 파기하였습니까?"
+  },
+  {
+    "variable": "BUSINESS_IS_MICRO_ENTERPRISE",
+    "question": "귀사는 \"소상공인기본법\" 제2조에 따른 소상공인으로, 특별히 가명정보를 처리할 인력을 추가로 둘 적정 자원이 부족합니까?"
+  },
+  {
+    "variable": "pseudonym_processing_unable_due_to_resource_limitations",
+    "question": "귀사는 소상공인으로서 가명정보와 추가정보의 접근 권한을 분리하기 어려운 합리적인 사유가 있습니까?"
+  },
+  {
+    "variable": "provides_pseudonymized_data_to_third_party",
+    "question": "귀사는 가명정보를 제3자에게 제공하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_RECORDS_PSEUDONYMOUS_DATA_RECIPIENT",
+    "question": "귀사는 제3자에게 가명정보를 제공할 때, 그 수령인을 기록하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_HAS_DEFINED_PSEUDONYM_PROCESSING_PERIOD",
+    "question": "귀사는 가명정보를 처리할 때 법 제28조의4 제2항에 따라 해당 가명정보의 처리 기간을 별도로 정하였습니까?"
+  },
+  {
+    "variable": "A29_10_P1_S1_compliant",
+    "question": "귀사는 해외로 개인정보를 이전할 때 정보 보호를 위한 안전성 확보 조치를 수행하고 있습니까?"
+  },
+  {
+    "variable": "A29_10_P1_S2_compliant",
+    "question": "귀사는 개인정보 침해 관련 고충처리 및 분쟁 해결에 관한 조치를 마련하고 있습니까?"
+  },
+  {
+    "variable": "A29_10_P1_S3_compliant",
+    "question": "귀사는 정보주체의 개인정보 보호를 위한 추가적인 필요한 조치를 수행하고 있습니까?"
+  },
+  {
+    "variable": "CONTRACT_INCLUDES_FOREIGN_TRANSFER_PROTECTION_MEASURES",
+    "question": "귀사는 개인정보를 국외로 이전할 때 보호조치를 포함한 서로 합의된 사항을 계약 내용에 반영하였습니까?"
+  },
+  {
+    "variable": "INTERNAL_MANAGEMENT_PLAN_ESTABLISHED",
+    "question": "귀사는 개인정보의 안전한 처리를 위한 내부 관리계획을 수립했습니까?"
+  },
+  {
+    "variable": "INTERNAL_MANAGEMENT_PLAN_IMPLEMENTED",
+    "question": "귀사는 수립된 개인정보 내부 관리계획을 실제로 이행하고 있습니까?"
+  },
+  {
+    "variable": "INTERNAL_MANAGEMENT_PLAN_MONITORED",
+    "question": "귀사는 수립되고 이행된 개인정보 내부 관리계획을 정기적으로 점검하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_IS_OPERATING_DATABASE_SYSTEM",
+    "question": "귀사는 개인정보를 처리할 수 있는 체계적으로 구성된 데이터베이스시스템을 운영하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_HAS_ACCESS_CONTROL_STANDARDS",
+    "question": "귀사는 개인정보처리시스템에 대한 접근 권한을 부여, 변경, 말소하기 위한 명확한 기준을 수립하고 실행하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_APPLIES_AUTHENTICATION_MEASURES",
+    "question": "귀사는 개인정보처리시스템에 접근하는 자가 정당한 권한을 가진 사용자인지를 확인하기 위한 인증수단 적용 기준을 설정하고 운영하고 있습니까?"
+  },
+  {
+    "variable": "DECREE_A30_P1_S3_Ia_compliant",
+    "question": "귀사는 개인정보처리시스템에 대한 침입을 탐지하고 차단하기 위한 조치를 운영하고 있습니까?"
+  },
+  {
+    "variable": "DECREE_A30_P1_S3_Ib_compliant",
+    "question": "귀사는 보호위원회가 정한 기준에 따라 개인정보처리시스템에 접속하는 개인정보취급자의 컴퓨터 등 주요 기기의 인터넷망을 차단하고 있습니까? (단, 일일평균 사용자 수가 100만 명 이상인 경우)"
+  },
+  {
+    "variable": "DECREE_A30_P1_S3_Ic_compliant",
+    "question": "귀사는 개인정보에 대한 접근 통제를 위하여 추가적인 필요한 조치를 운영하고 있습니까?"
+  },
+  {
+    "variable": "avg_daily_users_over_1000000",
+    "question": "귀사의 개인정보처리시스템에 저장 및 관리되는 개인정보 이용자의 일일평균 수가 전년도 말 기준 직전 3개월 동안 100만 명 이상입니까?"
+  },
+  {
+    "variable": "INTERNET_ACCESS_RESTRICTED",
+    "question": "귀사는 개인정보처리시스템에 접속하는 개인정보취급자의 컴퓨터에 대한 인터넷망을 차단하고 있습니까?"
+  },
+  {
+    "variable": "DECREE_A30_P1_S3_Ic_compliant",
+    "question": "귀사는 개인정보에 대한 접근을 통제하기 위해 필요한 모든 조치를 추가적으로 운영하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_SECURES_STORAGE_AND_TRANSMISSION",
+    "question": "귀사는 고객의 개인정보를 안전하게 저장하고 전송하기 위한 암호화 등 보안 조치를 취하고 있습니까?"
+  },
+  {
+    "variable": "Encryption_Of_Resident_Registration_Numbers",
+    "question": "귀사는 전자적으로 보관중인 주민등록번호에 대해 보호위원회가 정하여 고시하는 정보의 암호화 저장 또는 이에 상응하는 조치를 수행하고 있습니까?"
+  },
+  {
+    "variable": "DATA_TRANSMISSION_ENCRYPTED",
+    "question": "귀사는 정보통신망을 통해 고객의 개인정보 또는 인증정보를 송신하거나 수신할 때, 해당 정보를 암호화하거나 이에 상응하는 조치를 취하고 있습니까?"
+  },
+  {
+    "variable": "DECREE_A30_P1_S5_Ia_compliant",
+    "question": "귀사는 개인정보처리시스템에 접속한 자의 접속일시, 처리내역 등 접속기록을 저장·점검하고 이의 확인·감독을 수행하고 있습니까?"
+  },
+  {
+    "variable": "DECREE_A30_P1_S5_Ib_compliant",
+    "question": "귀사는 개인정보처리시스템에 대한 접속기록을 안전하게 보관하고 있습니까?"
+  },
+  {
+    "variable": "DECREE_A30_P1_S5_Ic_compliant",
+    "question": "귀사는 접속기록 보관 및 위조·변조 방지를 위해 필요한 조치를 수행하고 있습니까?"
+  },
+  {
+    "variable": "DECREE_A30_P1_S5_Ia_compliant",
+    "question": "귀사는 개인정보처리시스템에 접속한 사용자의 접속일시 및 처리내역 등을 기록하고, 이를 주기적으로 점검하며 적절하게 확인 및 감독하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_TAKES_PRECAUTIONS_TO_PREVENT_RECORD_TAMPERING",
+    "question": "귀사는 개인정보 접근 기록의 보관 및 위조·변조 방지를 위해 필요한 모든 조치를 취하고 있습니까?"
+  },
+  {
+    "variable": "DECREE_A30_P1_S6_compliant",
+    "question": "귀사는 개인정보 처리 시스템 및 개인정보 취급자가 사용하는 정보 기기에 대해 컴퓨터바이러스, 스파이웨어, 랜섬웨어 등의 악성 프로그램 침입 여부를 항상 점검하고 치료할 수 있도록 하는 프로그램을 설치, 운영하며 이를 주기적으로 갱신 및 점검하고 있습니까?"
+  },
+  {
+    "variable": "PHYSICAL_SECURITY_MEASURES_IN_PLACE",
+    "question": "귀사는 개인정보를 안전하게 보관하기 위한 보관시설을 마 련하거나 잠금장치를 설치하는 등 물리적 보안 조치를 하고 있습니까?"
+  },
+  {
+    "variable": "can_be_supported_by_protection_commission",
+    "question": "귀사는 개인정보 보호위원회로부터 개인정보의 안전성 확보 조치와 관련한 시스템 구축에 대한 지원을 받을 가능성이 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_COLLECTS_AND_PROCESSES_PERSONAL_DATA_EXTERNALLY",
+    "question": "귀사는 국외에서 국내 정보주체의 개인정보를 직접 수집하여 처리하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_POSTS_PRIVACY_POLICY_ON_WEBSITE",
+    "question": "귀사는 수립되거나 변경된 개인정보 처리방침을 귀사의 인터넷 홈페이지에 지속적으로 게재하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_INCLUDES_POLICY_IN_CONTRACTS",
+    "question": "귀사는 재화나 서비스를 제공하기 위해 작성된 계약서 등에 수립 혹은 변경된 개인정보 처리방침을 명시하고 이를 정보주체에게 발급하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_TOTAL_REVENUE_OVER_1_TRILLION_WON",
+    "question": "귀사는 전년도(또는 전 사업연도) 전체 매출액이 1조 원 이상입니까?"
+  },
+  {
+    "variable": "DECREE_A32_3_P1_S3_compliant",
+    "question": "귀사는 보호위원회로부터 관계 물품, 서류 등의 자료 제출 요구를 받았으며, 또한 국내 대리인의 지정을 보호위원회가 심의 및 의결했습니까?"
+  },
+  {
+    "variable": "data_breach_occurred",
+    "question": "귀사는 최근 고객의 개인정보가 유출, 도난, 분실된 보안 사고를 경험하였습니까?"
+  },
+  {
+    "variable": "PERSONAL_DATA_LOST_OR_STOLEN",
+    "question": "귀사는 최근에 고객의 개인정보가 분실되었거나 도난당한 적이 있습니까?"
+  },
+  {
+    "variable": "PERSONAL_DATA_LEAKED",
+    "question": "귀사는 최근에 고객의 개인정보가 무단으로 유출된 적이 있습니까?"
+  },
+  {
+    "variable": "notify_data_subjects_within_72_hours",
+    "question": "귀사는 정보 유출 등의 사실을 알게 된 때부터 72시간 이내에 고객에게 통지할 계획이 있습니까?"
+  },
+  {
+    "variable": "EMERGENCY_MEASURES_REQUIRED",
+    "question": "귀사는 개인정보 유출 등 사건 발생 시, 접속경로 차단 또는 취약점 점검 및 보완 등 즉각적인 조치가 필요하다고 판단하고 있습니까?"
+  },
+  {
+    "variable": "can_delay_notification_due_to_emergency",
+    "question": "귀사는 개인정보의 유출이 확산되는 것을 방지하기 위해 긴급 조치가 필요한 경우라 하여 정보 제공을 연기할 수 있는 요건을 충족하고 있습니까?"
+  },
+  {
+    "variable": "LAW_A34_P1_S1_SPECIFIED",
+    "question": "귀사는 정보 유출 등의 경우 유출된 개인정보의 구체적인 항목을 확인하고 있습니까?"
+  },
+  {
+    "variable": "LAW_A34_P1_S2_SPECIFIED",
+    "question": "귀사는 정보 유출 등의 경우 유출 시점과 그 경위를 구체적으로 확인하고 있습니까?"
+  },
+  {
+    "variable": "notify_data_subjects_with_available_info",
+    "question": "귀사는 정보 유출 사실이 확인되었지만 구체적인 세부 사항을 아직 확인하지 못한 경우, 현재 확인된 내용만으로 정보주체에게 우선 통지할 계획이 있습니까?"
+  },
+  {
+    "variable": "PART_OF_DECREE_A40_APPLICABILITY",
+    "question": "다음 항목에 귀사의 상황이 포함됩니까? 민감정보 또는 고유식별정보가 유출된 경우, 불법적 접근에 의한 개인정보 유출, 또는 1000명 이상의 고객정보가 유출된 경우."
+  },
+  {
+    "variable": "notify_data_subjects_with_available_info",
+    "question": "귀사는 정보 유출 사실이 확인되었지만 구체적인 세부 사항 확인 전이라도 우선 정보주체에게 통지할 계획이 있습니까?"
+  },
+  {
+    "variable": "data_breach_occurred",
+    "question": "귀사는 최근 개인정보 유출, 도난, 분실 등 보안 사고를 경험하였습니까?"
+  },
+  {
+    "variable": "emergency_situation",
+    "question": "귀사는 긴급 상황으로 인해 즉시 신고가 불가능한 경우가 있었습니까?"
+  },
+  {
+    "variable": "DATA_SUBJECTS_OVER_1000",
+    "question": "귀사는 1천명 이상의 정보주체에 관한 개인정보가 유출되었습니까?"
+  },
+  {
+    "variable": "notify_commission_and_specialized_agency_within_72_hours",
+    "question": "귀사는 개인정보가 유출된 것을 인지한 시점부터 72시간 이내에 보호위원회 또는 전문기관에 관련 사실을 서면 등으로 신고할 계획이 있습니까?"
+  },
+  {
+    "variable": "business_is_data_controller",
+    "question": "귀사는 정보주체의 개인정보를 직접 처리하는 개인정보처리자입니까?"
+  },
+  {
+    "variable": "DATA_SUBJECT_REQUESTS_ACCESS",
+    "question": "정보주체가 귀사에 자신의 개인정보 열람을 요청했습니까?"
+  },
+  {
+    "variable": "DIFFICULTY_IN_CONTINUING_DATA_COLLECTION_OUTLET",
+    "question": "귀사는 고객이 개인정보를 수집한 창구나 방법을 계속 운영하는 것이 어려운 정당한 사유가 있습니까?"
+  },
+  {
+    "variable": "DATA_ACCESS_REQUEST_HANDLED_IN_SAME_WAY_AS_COLLECTION",
+    "question": "귀사는 개인정보 열람 요구가 있을 때, 데이터 수집 시 사용한 창구 또는 방법과 동일한 수단으로 요구를 처리하고 있습니까?"
+  },
+  {
+    "variable": "BUSINESS_POSTS_DATA_ACCESS_PROCEDURE_ON_WEBSITE",
+    "question": "귀사는 정보주체가 자신의 개인정보에 대한 열람을 요구하는 방법과 절차를 귀사의 인터넷 홈페이지에 명확하게 공개하고 있습니까?"
+  },
+  {
+    "variable": "notify_data_subjects_within_10_days",
+    "question": "귀사는 개인정보 열람 요구를 받은 날로부터 10일 이내에 관련 정보를 정보주체에게 제공할 준비가 되었습니까?"
+  },
+  {
+    "variable": "IMMEDIATE_ACCESS_GRANTED",
+    "question": "귀사는 정보주체의 개인정보 열람 요구에 대해 즉시 접근을 허용했습니까?"
+  },
+  {
+    "variable": "notify_data_subjects_within_10_days",
+    "question": "귀사는 개인정보 열람 요구를 받은 날로부터 10일 이내에 연기 또는 거절의 사유 및 이의제기 방법을 정보주체에게 통지할 준비가 되어 있습니까?"
+  }
+]
