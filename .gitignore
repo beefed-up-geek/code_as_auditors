@@ -2,3 +2,6 @@
 .DS_Store
 **/outputs/
 **/output/
+neural_conflict/
+privaci/
+rag_based/

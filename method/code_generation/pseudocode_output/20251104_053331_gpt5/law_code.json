@@ -1,0 +1,1011 @@
+[
+  {
+    "id": "제21조",
+    "var_name": "LAW_A21",
+    "class": "조",
+    "title": "개인정보의 파기",
+    "content": "",
+    "parent": "제3장 제1절",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_USES_PERSONAL_INFORMATION",
+      "legal_pseudocode": "LAW_A21_P1['legal'] and (not LAW_A21_P2['condition'] or LAW_A21_P2['legal']) and (not LAW_A21_P3['condition'] or LAW_A21_P3['legal']) and (not LAW_A21_P4['condition'] or LAW_A21_P4['legal'])",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제21조 제1항",
+    "var_name": "LAW_A21_P1",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자는 보유기간의 경과, 개인정보의 처리 목적 달성, 가명정보의 처리 기간 경 과 등 그 개인정보가 불필요하게 되었을 때에는 지체 없이 그 개인정보를 파기하여야 한다. 다만, 다른 법령에 따라 보존하여야 하는 경우에는 그러하지 아니하다.",
+    "parent": "제21조",
+    "log": [
+      "<개정 2023. 3. 14.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_USES_PERSONAL_INFORMATION",
+      "legal_pseudocode": "(NOT_NECESSARY_PERSONAL_INFORMATION implies (DESTROYED_WITHOUT_DELAY or PRESERVED_BY_OTHER_LAW)) and (not NOT_NECESSARY_PERSONAL_INFORMATION implies True)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제21조 제2항",
+    "var_name": "LAW_A21_P2",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자가 제1항에 따라 개인정보를 파기할 때에는 복구 또는 재생되지 아니하도록 조치하여야 한다.",
+    "parent": "제21조",
+    "log": [],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제21조 제1항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A21_P1['condition'] and LAW_A21_P1['legal'] and NOT_NECESSARY_PERSONAL_INFORMATION and DESTROYED_WITHOUT_DELAY",
+      "legal_pseudocode": "DATA_DESTROYED_IRRECOVERABLY",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제21조 제3항",
+    "var_name": "LAW_A21_P3",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자가 제1항 단서에 따라 개인정보를 파기하지 아니하고 보존하여야 하는 경우에는 해당 개인정보 또는 개인정보파일을 다른 개인정보와 분리하여서 저장ㆍ관리하여야 한다.",
+    "parent": "제21조",
+    "log": [],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제21조 제1항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_USES_PERSONAL_INFORMATION and NOT_NECESSARY_PERSONAL_INFORMATION and PRESERVED_BY_OTHER_LAW",
+      "legal_pseudocode": "SEPARATE_STORAGE_MANAGEMENT",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제21조 제4항",
+    "var_name": "LAW_A21_P4",
+    "class": "항",
+    "title": "",
+    "content": "개인정보의 파기방법 및 절차 등에 필요한 사항은 대통령령으로 정한다.",
+    "parent": "제21조",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "True",
+      "legal_pseudocode": "True",
+      "action_pseudocode": "DECREE_A21_P1['condition'] = True"
+    }
+  },
+  {
+    "id": "제24조",
+    "var_name": "LAW_A24",
+    "class": "조",
+    "title": "고유식별정보의 처리 제한",
+    "content": "",
+    "parent": "제3장 제2절",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_UNIQUE_IDENTIFIER",
+      "legal_pseudocode": "((not PROCESSES_UNIQUE_IDENTIFIER) or (GOT_SEPARATE_UID_CONSENT or REQUIRED_BY_LAW_FOR_UID)) and ((not PROCESSES_UNIQUE_IDENTIFIER) or TOOK_UID_SECURITY_MEASURES)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조 제1항",
+    "var_name": "LAW_A24_P1",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자는 다음 각 호의 경우를 제외하고는 법령에 따라 개인을 고유하 게 구별하기 위하여 부여된 식별정보로서 대통령령으로 정하는 정보(이하 “고유식별정보”라 한다)를 처리할 수 없다.",
+    "parent": "제24조",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_UNIQUE_IDENTIFIER",
+      "legal_pseudocode": "(GOT_SEPARATE_UID_CONSENT or REQUIRED_BY_LAW_FOR_UID)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조 제1항 제1호",
+    "var_name": "LAW_A24_P1_S1",
+    "class": "호",
+    "title": "",
+    "content": "정보주체에게 제15조제2항 각 호 또는 제17조제2항 각 호의 사항을 알리고 다른 개인정보의 처리에 대한 동의와 별도로 동의를 받은 경우",
+    "parent": "제24조 제1항",
+    "log": [],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제15조 제2항"
+      },
+      {
+        "law": "개인정보보호법",
+        "id": "제17조 제2항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_UNIQUE_IDENTIFIER",
+      "legal_pseudocode": "(GOT_SEPARATE_UID_CONSENT and LAW_A15_P2_S1['condition'] and LAW_A15_P2_S2['condition'] and LAW_A15_P2_S3['condition'] and LAW_A15_P2_S4['condition']) or (LAW_A17_P2_S1['condition'] and LAW_A17_P2_S2['condition'] and LAW_A17_P2_S3['condition'] and LAW_A17_P2_S4['condition'] and LAW_A17_P2_S5['condition'] and GOT_SEPARATE_UID_CONSENT)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조 제1항 제2호",
+    "var_name": "LAW_A24_P1_S2",
+    "class": "호",
+    "title": "",
+    "content": "법령에서 구체적으로 고유식별정보의 처리를 요구하거나 허용하는 경우",
+    "parent": "제24조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_UNIQUE_IDENTIFIER",
+      "legal_pseudocode": "REQUIRED_BY_LAW_FOR_UID",
+      "action_pseudocode": "if LAW_A24_P1_S2['condition'] and LAW_A24_P1_S2['legal']: LAW_A24_P1['legal'] = True"
+    }
+  },
+  {
+    "id": "제24조 제2항",
+    "var_name": "LAW_A24_P2",
+    "class": "항",
+    "title": "",
+    "content": "",
+    "parent": "제24조",
+    "log": [
+      "삭제 <2013. 8. 6.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "True",
+      "legal_pseudocode": "True",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조 제3항",
+    "var_name": "LAW_A24_P3",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자가 제1항 각 호에 따라 고유식별정보를 처리하는 경우에는 그 고유식별정보가 분실ㆍ도난ㆍ유출 ㆍ위조ㆍ변조 또는 훼손되지 아니하도록 대통령령으로 정하는 바에 따라 암호화 등 안전성 확보에 필요한 조치를 하여야 한다.",
+    "parent": "제24조",
+    "log": [
+      "<개정 2015. 7. 24.>"
+    ],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제24조 제1항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_UNIQUE_IDENTIFIER and (LAW_A24_P1_S1['condition'] or LAW_A24_P1_S2['condition'])",
+      "legal_pseudocode": "TOOK_UID_SECURITY_MEASURES",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조 제4항",
+    "var_name": "LAW_A24_P4",
+    "class": "항",
+    "title": "",
+    "content": "보호위원회는 처리하는 개인정보의 종류ㆍ규모, 종업원 수 및 매출액 규모 등을 고려하여 대통령령으로 정하는 기준에 해당하는 개인정보처리자가 제3항에 따라 안전성 확보에 필요한 조치를 하였는지에 관하여 대통령령으로 정하는 바에 따라 정기적으로 조사하여야 한다.",
+    "parent": "제24조",
+    "log": [
+      "<신설 2016. 3. 29.>",
+      "<신설 2017. 7. 26.>",
+      "<신설 2020. 2. 4.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "False",
+      "legal_pseudocode": "True",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조 제5항",
+    "var_name": "LAW_A24_P5",
+    "class": "항",
+    "title": "",
+    "content": "보호위원회는 대통령령으로 정하는 전문기관으로 하여금 제4항에 따른 조사를 수행하게 할 수 있다.",
+    "parent": "제24조",
+    "log": [
+      "<신설 2016. 3. 29.>",
+      "<신설 2017. 7. 26.>",
+      "<신설 2020. 2. 4.>"
+    ],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제24조 제4항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A24_P4['condition']",
+      "legal_pseudocode": "True",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조의2",
+    "var_name": "LAW_A24_2",
+    "class": "조",
+    "title": "주민등록번호 처리의 제한",
+    "content": "",
+    "parent": "제3장 제2절",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_RRN",
+      "legal_pseudocode": "((RRN_ALLOWED_BY_LAW or RRN_NECESSARY_FOR_EMERGENCY or RRN_ALLOWED_BY_NOTICE) and (not STORES_RRN or RRN_ENCRYPTED_AT_REST) and (not ONLINE_MEMBERSHIP_FLOW or OFFERS_NON_RRN_SIGNUP))",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조의2 제1항",
+    "var_name": "LAW_A24_2_P1",
+    "class": "항",
+    "title": "",
+    "content": "제24조제1항에도 불구하고 개인정보처리자는 다음 각 호의 어느 하나에 해 당하는 경우를 제외하고는 주민등록번호를 처리할 수 없다.",
+    "parent": "제24조의2",
+    "log": [
+      "<개정 2014. 11. 19.>",
+      "<개정 2016. 3. 29.>",
+      "<개정 2017. 7. 26.>",
+      "<개정 2020. 2. 4.>"
+    ],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제24조 제1항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_USES_PERSONAL_INFORMATION and PROCESSES_RRN",
+      "legal_pseudocode": "(RRN_ALLOWED_BY_LAW or RRN_NECESSARY_FOR_EMERGENCY or RRN_ALLOWED_BY_NOTICE)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조의2 제1항 제1호",
+    "var_name": "LAW_A24_2_P1_S1",
+    "class": "호",
+    "title": "",
+    "content": "법률ㆍ대통령령ㆍ국회규칙ㆍ대법원규칙ㆍ헌법재판소규칙ㆍ중앙선거관리위원회규칙 및 감사원규칙에서 구체적 으로 주민등록번호의 처리를 요구하거나 허용한 경우",
+    "parent": "제24조의2 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_RRN",
+      "legal_pseudocode": "RRN_ALLOWED_BY_LAW",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조의2 제1항 제2호",
+    "var_name": "LAW_A24_2_P1_S2",
+    "class": "호",
+    "title": "",
+    "content": "정보주체 또는 제3자의 급박한 생명, 신체, 재산의 이익을 위하여 명백히 필요하다고 인정되는 경우",
+    "parent": "제24조의2 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_RRN",
+      "legal_pseudocode": "RRN_NECESSARY_FOR_EMERGENCY",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조의2 제1항 제3호",
+    "var_name": "LAW_A24_2_P1_S3",
+    "class": "호",
+    "title": "",
+    "content": "제1호 및 제2호에 준하여 주민등록번호 처리가 불가피한 경우로서 보호위원회가 고시로 정하는 경우",
+    "parent": "제24조의2 제1항",
+    "log": [],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제24조의2 제1항 제1호"
+      },
+      {
+        "law": "개인정보보호법",
+        "id": "제24조의2 제1항 제2호"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_RRN",
+      "legal_pseudocode": "RRN_ALLOWED_BY_NOTICE",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조의2 제2항",
+    "var_name": "LAW_A24_2_P2",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자는 제24조제3항에도 불구하고 주민등록번호가 분실ㆍ도난ㆍ유출ㆍ위조ㆍ변조 또는 훼손되지 아 니하도록 암호화 조치를 통하여 안전하게 보관하여야 한다. 이 경우 암호화 적용 대상 및 대상별 적용 시기 등에 관 하여 필요한 사항은 개인정보의 처리 규모와 유출 시 영향 등을 고려하여 대통령령으로 정한다.",
+    "parent": "제24조의2",
+    "log": [
+      "<신설 2014. 3. 24.>",
+      "<신설 2015. 7. 24.>"
+    ],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제24조 제3항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "PROCESSES_RRN",
+      "legal_pseudocode": "(not STORES_RRN) or (STORES_RRN and RRN_ENCRYPTED_AT_REST)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조의2 제3항",
+    "var_name": "LAW_A24_2_P3",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자는 제1항 각 호에 따라 주민등록번호를 처리하는 경우에도 정보주체가 인터넷 홈페이지를 통하 여 회원으로 가입하는 단계에서는 주민등록번호를 사용하지 아니하고도 회원으로 가입할 수 있는 방법을 제공하여 야 한다.",
+    "parent": "제24조의2",
+    "log": [
+      "<개정 2014. 3. 24.>"
+    ],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제24조의2 제1항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "(LAW_A24_2_P1['condition'] and (LAW_A24_2_P1_S1['condition'] or LAW_A24_2_P1_S2['condition'] or LAW_A24_2_P1_S3['condition'])) and PROCESSES_RRN and ONLINE_MEMBERSHIP_FLOW",
+      "legal_pseudocode": "OFFERS_NON_RRN_SIGNUP",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제24조의2 제4항",
+    "var_name": "LAW_A24_2_P4",
+    "class": "항",
+    "title": "",
+    "content": "보호위원회는 개인정보처리자가 제3항에 따른 방법을 제공할 수 있도록 관계 법령의 정비, 계획의 수립, 필요한 시설 및 시스템의 구축 등 제반 조치를 마련ㆍ지원할 수 있다.",
+    "parent": "제24조의2",
+    "log": [
+      "<개정 2014. 3. 24.>",
+      "<개정 2017. 7. 26.>",
+      "<개정 2020. 2. 4.>",
+      "[본조신설 2013. 8. 6.]"
+    ],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제24조의2 제3항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "True",
+      "legal_pseudocode": "True",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조",
+    "var_name": "LAW_A26",
+    "class": "조",
+    "title": "업무위탁에 따른 개인정보의 처리 제한",
+    "content": "",
+    "parent": "제3장 제2절",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING",
+      "legal_pseudocode": "(LAW_A26_P1['legal'] and LAW_A26_P2['legal'] and LAW_A26_P3['legal'] and LAW_A26_P4['legal'] and LAW_A26_P5['legal'] and LAW_A26_P6['legal'] and LAW_A26_P7['legal'])",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제1항",
+    "var_name": "LAW_A26_P1",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자가 제3자에게 개인정보의 처리 업무를 위탁하는 경 우에는 다음 각 호의 내용이 포함된 문서로 하여야 한다.",
+    "parent": "제26조",
+    "log": [
+      "<개정 2023. 3. 14.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING",
+      "legal_pseudocode": "(LAW_A26_P1_S1['legal'] and LAW_A26_P1_S2['legal'] and LAW_A26_P1_S3['legal'])",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제1항 제1호",
+    "var_name": "LAW_A26_P1_S1",
+    "class": "호",
+    "title": "",
+    "content": "위탁업무 수행 목적 외 개인정보의 처리 금지에 관한 사항",
+    "parent": "제26조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING and LAW_A26_P1['condition']",
+      "legal_pseudocode": "PROHIBIT_OUTSIDE_PURPOSE_IN_CONTRACT",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제1항 제2호",
+    "var_name": "LAW_A26_P1_S2",
+    "class": "호",
+    "title": "",
+    "content": "개인정보의 기술적ㆍ관리적 보호조치에 관한 사항",
+    "parent": "제26조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING and LAW_A26_P1['condition']",
+      "legal_pseudocode": "PROHIBIT_OUTSIDE_PURPOSE_IN_CONTRACT and INCLUDE_TECH_ADMIN_MEASURES_IN_CONTRACT",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제1항 제3호",
+    "var_name": "LAW_A26_P1_S3",
+    "class": "호",
+    "title": "",
+    "content": "그 밖에 개인정보의 안전한 관리를 위하여 대통령령으로 정한 사항",
+    "parent": "제26조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING and LAW_A26_P1['condition']",
+      "legal_pseudocode": "INCLUDE_TECH_ADMIN_MEASURES_IN_CONTRACT and PROHIBIT_OUTSIDE_PURPOSE_IN_CONTRACT and DECREE_DEFINED_ITEMS_INCLUDED",
+      "action_pseudocode": "LAW_A26_P1['legal'] = LAW_A26_P1_S1['legal'] and LAW_A26_P1_S2['legal'] and LAW_A26_P1_S3['legal']"
+    }
+  },
+  {
+    "id": "제26조 제2항",
+    "var_name": "LAW_A26_P2",
+    "class": "항",
+    "title": "",
+    "content": "제1항에 따라 개인정보의 처리 업무를 위탁하는 개인정보처리자(이하 “위탁자”라 한다)는 위탁하는 업무의 내용 과 개인정보 처리 업무를 위탁받아 처리하는 자(개인정보 처리 업무를 위탁받아 처리하는 자로부터 위탁받은 업무 를 다시 위탁받은 제3자를 포함하며, 이하 “수탁자”라 한다)를 정보주체가 언제든지 쉽게 확인할 수 있도록 대통령 령으로 정하는 방법에 따라 공개하여야 한다.",
+    "parent": "제26조",
+    "log": [
+      "<개정 2023. 3. 14.>"
+    ],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제26조 제1항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING and LAW_A26_P1['condition']",
+      "legal_pseudocode": "DISCLOSE_OUTSOURCING_INFO",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제3항",
+    "var_name": "LAW_A26_P3",
+    "class": "항",
+    "title": "",
+    "content": "위탁자가 재화 또는 서비스를 홍보하거나 판매를 권유하는 업무를 위탁하는 경우에는 대통령령으로 정하는 방 법에 따라 위탁하는 업무의 내용과 수탁자를 정보주체에게 알려야 한다. 위탁하는 업무의 내용이나 수탁자가 변경 된 경우에도 또한 같다.",
+    "parent": "제26조",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING and OUTSOURCE_MARKETING_SALES_PROMOTION",
+      "legal_pseudocode": "INFORMED_DATA_SUBJECT_OF_OUTSOURCING and (not OUTSOURCING_INFO_CHANGED or INFORMED_DATA_SUBJECT_OF_CHANGES)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제4항",
+    "var_name": "LAW_A26_P4",
+    "class": "항",
+    "title": "",
+    "content": "위탁자는 업무 위탁으로 인하여 정보주체의 개인정보가 분실ㆍ도난ㆍ유출ㆍ위조ㆍ변조 또는 훼손되지 아니하 도록 수탁자를 교육하고, 처리 현황 점검 등 대통령령으로 정하는 바에 따라 수탁자가 개인정보를 안전하게 처리하 는지를 감독하여야 한다.",
+    "parent": "제26조",
+    "log": [
+      "<개정 2015. 7. 24.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING",
+      "legal_pseudocode": "CONDUCTS_CONTRACTOR_TRAINING and MONITORS_CONTRACTOR_PROCESSING and IMPLEMENTS_SUPERVISION_MEASURES",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제5항",
+    "var_name": "LAW_A26_P5",
+    "class": "항",
+    "title": "",
+    "content": "수탁자는 개인정보처리자로부터 위탁받은 해당 업무 범위를 초과하여 개인정보를 이용하거나 제3자에게 제공하 여서는 아니 된다.",
+    "parent": "제26조",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING",
+      "legal_pseudocode": "not (CONTRACTOR_USED_BEYOND_SCOPE or CONTRACTOR_SHARED_WITH_THIRD_PARTY)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제6항",
+    "var_name": "LAW_A26_P6",
+    "class": "항",
+    "title": "",
+    "content": "수탁자는 위탁받은 개인정보의 처리 업무를 제3자에게 다시 위탁하려는 경우에는 위탁자의 동의를 받아야 한다.",
+    "parent": "제26조",
+    "log": [
+      "<신설 2023. 3. 14.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING",
+      "legal_pseudocode": "not CONTRACTOR_SUBCONTRACTED_WITHOUT_CONSENT",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제26조 제7항",
+    "var_name": "LAW_A26_P7",
+    "class": "항",
+    "title": "",
+    "content": "수탁자가 위탁받은 업무와 관련하여 개인정보를 처리하는 과정에서 이 법을 위반하여 발생한 손해배상책임에 대하여는 수탁자를 개인정보처리자의 소속 직원으로 본다.",
+    "parent": "제26조",
+    "log": [
+      "<개정 2023. 3. 14.>"
+    ],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제26조"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_OUTSOURCES_PROCESSING",
+      "legal_pseudocode": "True",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제29조",
+    "var_name": "LAW_A29",
+    "class": "조",
+    "title": "안전조치의무",
+    "content": "개인정보처리자는 개인정보가 분실ㆍ도난ㆍ유출ㆍ위조ㆍ변조 또는 훼손되지 아니하도록 내부 관리계획 수립, 접속기록 보관 등 대통령령으로 정하는 바에 따라 안전성 확보에 필요한 기술적ㆍ관리적 및 물리적 조치를 하여야 한다.",
+    "parent": "제4장",
+    "log": [
+      "<개정 2015. 7. 24.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_USES_PERSONAL_INFORMATION",
+      "legal_pseudocode": "TECH_ADMIN_PHYSICAL_MEASURES_IMPLEMENTED",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조",
+    "var_name": "LAW_A34",
+    "class": "조",
+    "title": "개인정보 유출 등의 통지ㆍ신고",
+    "content": "",
+    "parent": "제4장",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_USES_PERSONAL_INFORMATION and DATA_BREACH_KNOWN",
+      "legal_pseudocode": "(LAW_A34_P1['legal'] and LAW_A34_P2['legal'] and LAW_A34_P3['legal'] and LAW_A34_P4['legal'])",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제1항",
+    "var_name": "LAW_A34_P1",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자는 개인정보가 분실ㆍ도난ㆍ유출(이하 이 조에서 “유출등 ”이라 한다)되었음을 알게 되었을 때에는 지체 없이 해당 정보주체에게 다음 각 호의 사항을 알려야 한다. 다만, 정보 주체의 연락처를 알 수 없는 경우 등 정당한 사유가 있는 경우에는 대통령령으로 정하는 바에 따라 통지를 갈음하는 조치를 취할 수 있다.",
+    "parent": "제34조",
+    "log": [
+      "<개정 2023. 3. 14.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_USES_PERSONAL_INFORMATION and DATA_BREACH_KNOWN",
+      "legal_pseudocode": "(NOTIFY_DATA_SUBJECT_WITHOUT_DELAY and INCLUDE_ITEMS_S1_TO_S5) or (CANNOT_CONTACT_DATA_SUBJECT and TOOK_ALTERNATIVE_NOTICE_PER_DECREE)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제1항 제1호",
+    "var_name": "LAW_A34_P1_S1",
+    "class": "호",
+    "title": "",
+    "content": "유출등이 된 개인정보의 항목",
+    "parent": "제34조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "DATA_BREACH_KNOWN",
+      "legal_pseudocode": "INCLUDE_ITEMS_S1",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제1항 제2호",
+    "var_name": "LAW_A34_P1_S2",
+    "class": "호",
+    "title": "",
+    "content": "유출등이 된 시점과 그 경위",
+    "parent": "제34조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "DATA_BREACH_KNOWN",
+      "legal_pseudocode": "NOTIFY_DATA_SUBJECT_WITHOUT_DELAY and INCLUDE_ITEMS_S1_TO_S5",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제1항 제3호",
+    "var_name": "LAW_A34_P1_S3",
+    "class": "호",
+    "title": "",
+    "content": "유출등으로 인하여 발생할 수 있는 피해를 최소화하기 위하여 정보주체가 할 수 있는 방법 등에 관한 정보",
+    "parent": "제34조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "DATA_BREACH_KNOWN",
+      "legal_pseudocode": "NOTIFY_DATA_SUBJECT_WITHOUT_DELAY and (INCLUDE_ITEMS_S3 or (CANNOT_CONTACT_DATA_SUBJECT and TOOK_ALTERNATIVE_NOTICE_PER_DECREE and INCLUDE_ITEMS_S3))",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제1항 제4호",
+    "var_name": "LAW_A34_P1_S4",
+    "class": "호",
+    "title": "",
+    "content": "개인정보처리자의 대응조치 및 피해 구제절차",
+    "parent": "제34조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "DATA_BREACH_KNOWN and LAW_A34_P1['condition']",
+      "legal_pseudocode": "NOTIFY_DATA_SUBJECT_WITHOUT_DELAY and INCLUDE_ITEMS_S1_TO_S5",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제1항 제5호",
+    "var_name": "LAW_A34_P1_S5",
+    "class": "호",
+    "title": "",
+    "content": "정보주체에게 피해가 발생한 경우 신고 등을 접수할 수 있는 담당부서 및 연락처",
+    "parent": "제34조 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A34_P1['condition'] and DATA_BREACH_KNOWN",
+      "legal_pseudocode": "NOTIFY_DATA_SUBJECT_WITHOUT_DELAY and INCLUDE_ITEMS_S5",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제2항",
+    "var_name": "LAW_A34_P2",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자는 개인정보가 유출등이 된 경우 그 피해를 최소화하기 위한 대책을 마련하고 필요한 조치를 하 여야 한다.",
+    "parent": "제34조",
+    "log": [
+      "<개정 2023. 3. 14.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "BUSINESS_USES_PERSONAL_INFORMATION and DATA_BREACH_KNOWN",
+      "legal_pseudocode": "BREACH_RESPONSE_PLAN_PREPARED and BREACH_MITIGATION_ACTIONS_TAKEN",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제3항",
+    "var_name": "LAW_A34_P3",
+    "class": "항",
+    "title": "",
+    "content": "개인정보처리자는 개인정보의 유출등이 있음을 알게 되었을 때에는 개인정보의 유형, 유출등의 경로 및 규모 등 을 고려하여 대통령령으로 정하는 바에 따라 제1항 각 호의 사항을 지체 없이 보호위원회 또는 대통령령으로 정하 는 전문기관에 신고하여야 한다. 이 경우 보호위원회 또는 대통령령으로 정하는 전문기관은 피해 확산방지, 피해 복 구 등을 위한 기술을 지원할 수 있다.",
+    "parent": "제34조",
+    "log": [
+      "<개정 2013. 3. 23.>",
+      "<개정 2014. 11. 19.>",
+      "<개정 2017. 7. 26.>",
+      "<개정 2020. 2. 4.>",
+      "<개정 2023. 3. 14.>"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "DATA_BREACH_KNOWN and MEETS_DECREE_INVESTIGATION_CRITERIA",
+      "legal_pseudocode": "REPORTED_TO_AUTHORITY_WITHOUT_DELAY and REPORT_INCLUDED_REQUIRED_ITEMS",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제34조 제4항",
+    "var_name": "LAW_A34_P4",
+    "class": "항",
+    "title": "",
+    "content": "제1항에 따른 유출등의 통지 및 제3항에 따른 유출등의 신고의 시기, 방법, 절차 등에 필요한 사항은 대통령령으 로 정한다.",
+    "parent": "제34조",
+    "log": [
+      "<개정 2023. 3. 14.>",
+      "[제목개정 2023. 3. 14.]"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "DATA_BREACH_KNOWN",
+      "legal_pseudocode": "(NOTIFY_DATA_SUBJECT_WITHOUT_DELAY and (INCLUDE_ITEMS_S1_TO_S5 or (INCLUDE_ITEMS_S1 and INCLUDE_ITEMS_S3 and INCLUDE_ITEMS_S5)) and (not CANNOT_CONTACT_DATA_SUBJECT or TOOK_ALTERNATIVE_NOTICE_PER_DECREE) and REPORTED_TO_AUTHORITY_WITHOUT_DELAY and REPORT_INCLUDED_REQUIRED_ITEMS)",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4",
+    "var_name": "LAW_A39_4",
+    "class": "조",
+    "title": "비밀유지명령",
+    "content": "",
+    "parent": "제6장",
+    "log": [],
+    "reference": []
+  },
+  {
+    "id": "제39조의4 제1항",
+    "var_name": "LAW_A39_4_P1",
+    "class": "항",
+    "title": "",
+    "content": "법원은 이 법을 위반한 행위로 인한 손해배상청구소송에서 당사자의 신청에 따른 결정으 로 다음 각 호의 자에게 그 당사자가 보유한 영업비밀을 해당 소송의 계속적인 수행 외의 목적으로 사용하거나 그 영업비밀에 관계된 이 항에 따른 명령을 받은 자 외의 자에게 공개하지 아니할 것을 명할 수 있다. 다만, 그 신청 시 점까지 다음 각 호의 자가 준비서면의 열람이나 증거조사 외의 방법으로 그 영업비밀을 이미 취득하고 있는 경우에 는 그러하지 아니하다.",
+    "parent": "제39조의4",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAWSUIT_FOR_PIPA_DAMAGE and PARTY_REQUESTS_SECRECY_ORDER",
+      "legal_pseudocode": "(not ALREADY_ACQUIRED_BY_OTHER_MEANS) and COURT_ISSUED_ORDER",
+      "action_pseudocode": "SECRECY_ORDER_RECIPIENTS = {\"other_party\",\"agent\",\"others_in_case\"} if (LAWSUIT_FOR_PIPA_DAMAGE and PARTY_REQUESTS_SECRECY_ORDER and (not ALREADY_ACQUIRED_BY_OTHER_MEANS) and COURT_ISSUED_ORDER) else set()"
+    }
+  },
+  {
+    "id": "제39조의4 제1항 제1호",
+    "var_name": "LAW_A39_4_P1_S1",
+    "class": "호",
+    "title": "",
+    "content": "다른 당사자(법인인 경우에는 그 대표자를 말한다)",
+    "parent": "제39조의4 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P1['condition']",
+      "legal_pseudocode": "True",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제1항 제2호",
+    "var_name": "LAW_A39_4_P1_S2",
+    "class": "호",
+    "title": "",
+    "content": "당사자를 위하여 해당 소송을 대리하는 자",
+    "parent": "제39조의4 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P1['condition']",
+      "legal_pseudocode": "LAW_A39_4_P1['legal']",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제1항 제3호",
+    "var_name": "LAW_A39_4_P1_S3",
+    "class": "호",
+    "title": "",
+    "content": "그 밖에 해당 소송으로 영업비밀을 알게 된 자",
+    "parent": "제39조의4 제1항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P1['condition']",
+      "legal_pseudocode": "True",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제2항",
+    "var_name": "LAW_A39_4_P2",
+    "class": "항",
+    "title": "",
+    "content": "제1항에 따른 명령(이하 “비밀유지명령”이라 한다)을 신청하는 자는 다음 각 호의 사유를 모두 소명하여야 한다.",
+    "parent": "제39조의4",
+    "log": [],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제39조의4 제1항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P1['condition'] and PARTY_REQUESTS_SECRECY_ORDER",
+      "legal_pseudocode": "(LAW_A39_4_P2_S1['legal'] and LAW_A39_4_P2_S2['legal'])",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제2항 제1호",
+    "var_name": "LAW_A39_4_P2_S1",
+    "class": "호",
+    "title": "",
+    "content": "이미 제출하였거나 제출하여야 할 준비서면, 이미 조사하였거나 조사하여야 할 증거 또는 제39조의3제1항에 따라 제출하였거나 제출하여야 할 자료에 영업비밀이 포함되어 있다는 것",
+    "parent": "제39조의4 제2항",
+    "log": [],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제39조의3 제1항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P2['condition']",
+      "legal_pseudocode": "EVIDENCE_OR_FILINGS_INCLUDE_TRADE_SECRET or MATERIALS_PER_A39_3_P1_INCLUDE_TRADE_SECRET",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제2항 제2호",
+    "var_name": "LAW_A39_4_P2_S2",
+    "class": "호",
+    "title": "",
+    "content": "제1호의 영업비밀이 해당 소송 수행 외의 목적으로 사용되거나 공개되면 당사자의 영업에 지장을 줄 우려가 있 어 이를 방지하기 위하여 영업비밀의 사용 또는 공개를 제한할 필요가 있다는 것",
+    "parent": "제39조의4 제2항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P2['condition'] and LAW_A39_4_P2_S1['legal']",
+      "legal_pseudocode": "RISK_OF_BUSINESS_HARM_IF_TRADE_SECRET_USED_OR_DISCLOSED and NEED_TO_LIMIT_USE_OR_DISCLOSURE",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제3항",
+    "var_name": "LAW_A39_4_P3",
+    "class": "항",
+    "title": "",
+    "content": "비밀유지명령의 신청은 다음 각 호의 사항을 적은 서면으로 하여야 한다.",
+    "parent": "제39조의4",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "PARTY_REQUESTS_SECRECY_ORDER",
+      "legal_pseudocode": "LAW_A39_4_P3_S1['legal'] and LAW_A39_4_P3_S2['legal'] and LAW_A39_4_P3_S3['legal']",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제3항 제1호",
+    "var_name": "LAW_A39_4_P3_S1",
+    "class": "호",
+    "title": "",
+    "content": "비밀유지명령을 받을 자",
+    "parent": "제39조의4 제3항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P3['condition'] and LAW_A39_4_P3['legal']",
+      "legal_pseudocode": "APPLICATION_IDENTIFIES_RECIPIENTS",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제3항 제2호",
+    "var_name": "LAW_A39_4_P3_S2",
+    "class": "호",
+    "title": "",
+    "content": "비밀유지명령의 대상이 될 영업비밀을 특정하기에 충분한 사실",
+    "parent": "제39조의4 제3항",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P3['condition'] and LAW_A39_4_P2['legal'] and LAW_A39_4_P1['condition']",
+      "legal_pseudocode": "APPLICATION_SPECIFIES_TRADE_SECRET",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제3항 제3호",
+    "var_name": "LAW_A39_4_P3_S3",
+    "class": "호",
+    "title": "",
+    "content": "제2항 각 호의 사유에 해당하는 사실",
+    "parent": "제39조의4 제3항",
+    "log": [],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제39조의4 제2항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P3['condition'] and LAW_A39_4_P2['condition']",
+      "legal_pseudocode": "LAW_A39_4_P2_S1['legal'] and LAW_A39_4_P2_S2['legal']",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제4항",
+    "var_name": "LAW_A39_4_P4",
+    "class": "항",
+    "title": "",
+    "content": "법원은 비밀유지명령이 결정된 경우에는 그 결정서를 비밀유지명령을 받을 자에게 송달하여야 한다.",
+    "parent": "제39조의4",
+    "log": [],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P1['condition'] and LAW_A39_4_P1['legal'] and LAW_A39_4_P6['legal'] is not False and COURT_ISSUED_ORDER",
+      "legal_pseudocode": "COURT_DELIVERED_ORDER_TO_RECIPIENTS",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제5항",
+    "var_name": "LAW_A39_4_P5",
+    "class": "항",
+    "title": "",
+    "content": "비밀유지명령은 제4항의 결정서가 비밀유지명령을 받을 자에게 송달된 때부터 효력이 발생한다.",
+    "parent": "제39조의4",
+    "log": [],
+    "reference": [
+      {
+        "law": "개인정보보호법",
+        "id": "제39조의4 제4항"
+      }
+    ],
+    "pseudocode": {
+      "condition_pseudocode": "LAW_A39_4_P4['condition'] and LAW_A39_4_P4['legal']",
+      "legal_pseudocode": "COURT_DELIVERED_ORDER_TO_RECIPIENTS",
+      "action_pseudocode": ""
+    }
+  },
+  {
+    "id": "제39조의4 제6항",
+    "var_name": "LAW_A39_4_P6",
+    "class": "항",
+    "title": "",
+    "content": "비밀유지명령의 신청을 기각하거나 각하한 재판에 대해서는 즉시항고를 할 수 있다.",
+    "parent": "제39조의4",
+    "log": [
+      "[전문개정 2023. 3. 14.]"
+    ],
+    "reference": [],
+    "pseudocode": {
+      "condition_pseudocode": "LAWSUIT_FOR_PIPA_DAMAGE and PARTY_REQUESTS_SECRECY_ORDER and not COURT_ISSUED_ORDER",
+      "legal_pseudocode": "True",
+      "action_pseudocode": ""
+    }
+  }
+]
