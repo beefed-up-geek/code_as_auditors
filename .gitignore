@@ -7,3 +7,4 @@ privaci/
 rag_based/
 **/pseudocode_output/
 **/code_output/
+**/__pycache__/
