@@ -5,3 +5,5 @@
 neural_conflict/
 privaci/
 rag_based/
+**/pseudocode_output/
+**/code_output/

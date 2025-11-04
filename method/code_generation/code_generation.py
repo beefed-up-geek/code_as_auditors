@@ -482,7 +482,7 @@ def generate_article_list(article_list=ARTICLES):
 def main(article_list=ARTICLES):
     processed_laws, variables, log_entries = generate_article_list(article_list=article_list)
 
-    output_dir = Path(__file__).resolve().parent / "psuedocode_output"
+    output_dir = Path(__file__).resolve().parent / "pseudocode_output"
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     target_dir = output_dir / timestamp
     target_dir.mkdir(parents=True, exist_ok=True)
