@@ -1,3 +1,4 @@
+import argparse
 import json
 import sys
 from dataclasses import dataclass, field
@@ -10,7 +11,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from method.utils.law_parser import full_law_json
 
-INPUT_PSEUDOCODE_DIR = "../code_output/20251105_012314_5mini_5_15"
+INPUT_PSEUDOCODE_DIR = "../outputs/legal_code_output/20251105_010712_5_5mini_15"
 DEBUG = False
 
 
@@ -237,8 +238,9 @@ def generate_code_source(root: LawNode, path: Optional[Path] = None) -> Tuple[st
     lines: List[str] = []
     lines.append("# Auto-generated code scaffold")
     lines.append("")
-    lines.append('SUBJECT = ""')
-    lines.append('RESULT_FILE = "execution_result.txt"')
+    lines.append("from pathlib import Path")
+    lines.append("")
+    lines.append('CASE_ID = "Default"')
     lines.append("RESULT_LINES = []")
     lines.append("ERROR_LINES = []")
     lines.append("")
@@ -249,7 +251,8 @@ def generate_code_source(root: LawNode, path: Optional[Path] = None) -> Tuple[st
     lines.append('    ERROR_LINES.append(f"{law_var}에서 시행 오류가 발생했다")')
     lines.append("")
     lines.append("def write_output():")
-    lines.append('    lines = [f"SUBJECT: {SUBJECT}"]')
+    lines.append("    result_path = Path(__file__).resolve().with_name(f'{CASE_ID}.txt')")
+    lines.append('    lines = [f"CASE_ID: {CASE_ID}"]')
     lines.append('    lines.append("")')
     lines.append('    lines.append("Results:")')
     lines.append("    if RESULT_LINES:")
@@ -262,7 +265,7 @@ def generate_code_source(root: LawNode, path: Optional[Path] = None) -> Tuple[st
     lines.append("        lines.extend(ERROR_LINES)")
     lines.append("    else:")
     lines.append('        lines.append("None")')
-    lines.append('    with open(RESULT_FILE, "w", encoding="utf-8") as handle:')
+    lines.append('    with result_path.open("w", encoding="utf-8") as handle:')
     lines.append('        handle.write("\\n".join(lines) + "\\n")')
     lines.append("")
     if user_variable_lines:
@@ -351,12 +354,28 @@ def visualize_tree(root: LawNode) -> str:
 
     return "\n".join(lines)
 
-def main():
-    tree_root = build_law_tree()
+def parse_cli_arguments(argv: Optional[List[str]] = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate executable code from legal pseudocode artifacts.")
+    parser.add_argument(
+        "-d",
+        "--directory",
+        dest="directory",
+        metavar="PATH",
+        help="Directory containing law_code.json, variables.json, etc. Generated code will be written there.",
+    )
+    return parser.parse_args(argv)
+
+
+def main(argv: Optional[List[str]] = None):
+    args = parse_cli_arguments(argv)
+    target_dir = Path(args.directory).expanduser().resolve() if args.directory else None
+
+    tree_root = build_law_tree(target_dir)
     visualization = visualize_tree(tree_root)
-    if DEBUG: print(visualization)
-    generated_path, metadata_entries = write_generated_code(tree_root)
-    metadata_path = write_metadata(metadata_entries)
+    if DEBUG:
+        print(visualization)
+    generated_path, metadata_entries = write_generated_code(tree_root, target_dir)
+    metadata_path = write_metadata(metadata_entries, target_dir)
     print(f"\nGenerated code written to: {generated_path}")
     print(f"Metadata written to: {metadata_path}")
     return

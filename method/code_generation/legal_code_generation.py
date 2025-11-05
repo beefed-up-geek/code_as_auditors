@@ -1,3 +1,4 @@
+import argparse
 import json
 import sys
 from datetime import datetime
@@ -16,9 +17,14 @@ from method.utils.law_parser import (
 from method.utils.llm_interface import llm_response
 
 DEBUG = True
-GENERATION_LLM = "gpt-5-mini"
-FEEDBACK_LLM = "gpt-5"
-MAX_FEEDBACK_LOOP = 15
+DEFAULT_GENERATION_LLM = "gpt-5-mini"
+DEFAULT_FEEDBACK_LLM = "gpt-5"
+DEFAULT_MAX_FEEDBACK_LOOP = 15
+DEFAULT_OUTPUT_DIR = (Path(__file__).resolve().parent / "../outputs/legal_code_output").resolve()
+
+GENERATION_LLM = DEFAULT_GENERATION_LLM
+FEEDBACK_LLM = DEFAULT_FEEDBACK_LLM
+MAX_FEEDBACK_LOOP = DEFAULT_MAX_FEEDBACK_LOOP
 ARTICLES = ["제21조", "제24조", "제24조의2", "제26조", "제29조", "제34조", "제39조의4"] #["제29조", "제26조"] # ["제29조", "제26조", "제34조", "제21조", "제24조의2", "제39조의4", "제24조"]
 base_variables = [
         {
@@ -93,6 +99,39 @@ fewshot_examples = """
   ]
 }
 """
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Generate logical encodings for PIPA articles.")
+    parser.add_argument(
+        "--generation-llm",
+        default=DEFAULT_GENERATION_LLM,
+        help=f"LLM used for generation (default: {DEFAULT_GENERATION_LLM})",
+    )
+    parser.add_argument(
+        "--feedback-llm",
+        default=DEFAULT_FEEDBACK_LLM,
+        help=f"LLM used for feedback evaluation (default: {DEFAULT_FEEDBACK_LLM})",
+    )
+    parser.add_argument(
+        "--max-feedback-loop",
+        type=int,
+        default=DEFAULT_MAX_FEEDBACK_LOOP,
+        help=f"Maximum number of feedback iterations (default: {DEFAULT_MAX_FEEDBACK_LOOP})",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=DEFAULT_OUTPUT_DIR,
+        help=f"Directory to store generated outputs (default: {DEFAULT_OUTPUT_DIR})",
+    )
+    return parser.parse_args()
+
+def _resolve_output_dir(path_value):
+    path = path_value if isinstance(path_value, Path) else Path(path_value)
+    path = path.expanduser()
+    if not path.is_absolute():
+        path = (Path(__file__).resolve().parent / path).resolve()
+    return path
 
 def initial_generation(law_data, variables):
     base_var_str = json.dumps(variables, ensure_ascii=False, indent=2)
@@ -480,12 +519,30 @@ def generate_article_list(article_list=ARTICLES):
 
     return processed_laws, variables, log_entries
 
-def main(article_list=ARTICLES):
-    processed_laws, variables, log_entries = generate_article_list(article_list=article_list)
+def main(
+    article_list=ARTICLES,
+    *,
+    generation_llm=None,
+    feedback_llm=None,
+    max_feedback_loop=None,
+    output_dir=None,
+):
+    global GENERATION_LLM, FEEDBACK_LLM, MAX_FEEDBACK_LOOP
 
-    output_dir = Path(__file__).resolve().parent / "../code_output"
+    if generation_llm is not None:
+        GENERATION_LLM = generation_llm
+    if feedback_llm is not None:
+        FEEDBACK_LLM = feedback_llm
+    if max_feedback_loop is not None:
+        if max_feedback_loop < 1:
+            raise ValueError("max_feedback_loop must be a positive integer.")
+        MAX_FEEDBACK_LOOP = max_feedback_loop
+
+    processed_laws, variables, log_entries = generate_article_list(article_list=article_list)
+    output_dir_path = _resolve_output_dir(output_dir or DEFAULT_OUTPUT_DIR)
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    target_dir = output_dir / timestamp
+    target_dir = output_dir_path / timestamp
     target_dir.mkdir(parents=True, exist_ok=True)
 
     law_path = target_dir / "law_code.json"
@@ -507,6 +564,7 @@ def main(article_list=ARTICLES):
         "FEEDBACK_LLM": FEEDBACK_LLM,
         "MAX_FEEDBACK_LOOP": MAX_FEEDBACK_LOOP,
         "ARTICLES": article_list,
+        "OUTPUT_DIR": str(output_dir_path),
     }
     with metadata_path.open("w", encoding="utf-8") as metadata_file:
         json.dump(metadata_payload, metadata_file, ensure_ascii=False, indent=2)
@@ -518,4 +576,10 @@ def main(article_list=ARTICLES):
         print(f"metadata saved in {metadata_path}")
 
 if __name__ == "__main__":
-    main()
+    args = parse_arguments()
+    main(
+        generation_llm=args.generation_llm,
+        feedback_llm=args.feedback_llm,
+        max_feedback_loop=args.max_feedback_loop,
+        output_dir=args.output_dir,
+    )
