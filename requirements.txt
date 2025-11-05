@@ -48,7 +48,7 @@ setuptools==75.1.0
 sympy==1.14.0
 termcolor==3.2.0
 tokenizers==0.21.4
-torch==2.7.1
+torch
 torchaudio==2.8.0
 torchcodec==0.5
 torchvision==0.22.1
