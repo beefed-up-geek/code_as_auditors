@@ -1,0 +1,7 @@
+SUBJECT: 
+
+Results:
+No non-compliant law variables detected.
+
+Errors:
+None

@@ -18,7 +18,7 @@ from method.utils.llm_interface import llm_response
 DEBUG = True
 GENERATION_LLM = "gpt-5-mini"
 FEEDBACK_LLM = "gpt-5"
-MAX_FEEDBACK_LOOP = 5
+MAX_FEEDBACK_LOOP = 15
 ARTICLES = ["제21조", "제24조", "제24조의2", "제26조", "제29조", "제34조", "제39조의4"] #["제29조", "제26조"] # ["제29조", "제26조", "제34조", "제21조", "제24조의2", "제39조의4", "제24조"]
 base_variables = [
         {
@@ -223,6 +223,9 @@ Evaluate the generated result according to the following four criteria.
    - Verify that article identifiers follow the proper format.
 
    **Example:**
+     - Incorrect: "legal_pseudocode":(not OTHER_LAW_REQUIRES_RETENTION) implies DATA_DESTROYED_WITHOUT_DELAY → "implies" does not exist in python. 
+     - Fix: Change to "legal_pseudocode":OTHER_LAW_REQUIRES_RETENTION or DATA_DESTROYED_WITHOUT_DELAY
+
      - Incorrect: A new variable "OUTSOURCING_CONTRACT_INCLUDES_OTHER_SAFE_MANAGEMENT_ITEMS" has more than 4 words
      - Fix: Change variable name "OUTSOURCING_CONTRACT_INCLUDES_OTHER_SAFE_MANAGEMENT_ITEMS" to "OUTSOURCING_CONTRACT_SAFE_ITEMS" to ensure added_variables are less than 5 words.
 
@@ -232,9 +235,8 @@ Evaluate the generated result according to the following four criteria.
    - Examples:  
        - Article 15(1) → `LAW_A15_P1`  
        - Article 15(1)(ii) → `LAW_A15_P1_S2`  
-   - For enforcement decree articles, use the format `DECREE_A[ArticleNumber]_P[ParagraphNumber]`.  
    - All identifiers must be uppercase and, when referenced, must include either `['condition']` or `['legal']`.  
-       - Example: `LAW_A15_P1['condition']`, `DECREE_A29_P2_S1['legal']`
+       - Example: `LAW_A15_P1['condition']`, `LAW_A29_P2_S1['legal']`
 '''
     usr_prompt = f'''Assess a following pseudocode JSON representation of a Korean privacy law article.
 [Existing Base Variable List]
@@ -327,7 +329,6 @@ Your task is to **regenerate an improved JSON schema** based on the previously g
 6. When referencing other articles, follow the naming convention below:
    - Base format: `LAW_A[ArticleNumber]_P[ParagraphNumber]`
    - For subparagraphs: append `_S[SubparagraphNumber]`
-   - For enforcement decree articles: `DECREE_A[ArticleNumber]_P[ParagraphNumber]`
    - Every reference must include either `['condition']` or `['legal']`
      - Example: `LAW_A15_P1['condition']`
 7. Incorporate all feedback regarding “incorrect variable names,” “ambiguous questions,” “redundant variables,” and “logical inconsistencies.”  
@@ -482,7 +483,7 @@ def generate_article_list(article_list=ARTICLES):
 def main(article_list=ARTICLES):
     processed_laws, variables, log_entries = generate_article_list(article_list=article_list)
 
-    output_dir = Path(__file__).resolve().parent / "code_output"
+    output_dir = Path(__file__).resolve().parent / "../code_output"
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     target_dir = output_dir / timestamp
     target_dir.mkdir(parents=True, exist_ok=True)
@@ -490,6 +491,7 @@ def main(article_list=ARTICLES):
     law_path = target_dir / "law_code.json"
     variables_path = target_dir / "variables.json"
     log_path = target_dir / "log.txt"
+    metadata_path = target_dir / "code_gen_metadata.json"
 
     with law_path.open("w", encoding="utf-8") as law_file:
         json.dump(processed_laws, law_file, ensure_ascii=False, indent=2)
@@ -500,10 +502,20 @@ def main(article_list=ARTICLES):
     with log_path.open("w", encoding="utf-8") as log_file:
         log_file.write("\n".join(log_entries))
 
+    metadata_payload = {
+        "GENERATION_LLM": GENERATION_LLM,
+        "FEEDBACK_LLM": FEEDBACK_LLM,
+        "MAX_FEEDBACK_LOOP": MAX_FEEDBACK_LOOP,
+        "ARTICLES": article_list,
+    }
+    with metadata_path.open("w", encoding="utf-8") as metadata_file:
+        json.dump(metadata_payload, metadata_file, ensure_ascii=False, indent=2)
+
     if DEBUG:
         print(f"pseudocode saved in {law_path}")
         print(f"variables saved in {variables_path}")
         print(f"logs saved in {log_path}")
+        print(f"metadata saved in {metadata_path}")
 
 if __name__ == "__main__":
     main()
