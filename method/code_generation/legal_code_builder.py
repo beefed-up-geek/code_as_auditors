@@ -144,18 +144,14 @@ def generate_traversal_code(root: LawNode, starting_line: int = 0) -> Tuple[List
 
         add_line(f"def {function_name}():")
         indent = "    "
-        try_indent = indent
-        body_indent = indent * 2
-        nested_indent = indent * 3
-        deepest_indent = indent * 4
+        body_indent = indent
+        nested_indent = indent * 2
+        deepest_indent = indent * 3
 
         condition_expr = (node.condition_pseudocode or "").strip()
         action_expr = node.action_pseudocode or ""
         legal_expr = (node.legal_pseudocode or "").strip()
 
-        var_literal = repr(var_name)
-
-        add_line(f"{try_indent}try:")
         has_body = False
 
         if condition_expr:
@@ -192,9 +188,6 @@ def generate_traversal_code(root: LawNode, starting_line: int = 0) -> Tuple[List
         if not has_body:
             add_line(f"{body_indent}pass")
 
-        add_line(f"{try_indent}except Exception:")
-        add_line(f"{body_indent}record_error({var_literal})")
-
         for child in node.children:
             emit_node(child)
 
@@ -222,12 +215,8 @@ def generate_traversal_code(root: LawNode, starting_line: int = 0) -> Tuple[List
 
     add_line("")
     add_line('if __name__ == "__main__":')
-    add_line("    try:")
-    add_line("        main()")
-    add_line("    except Exception:")
-    add_line("        record_error('MAIN')")
-    add_line("    finally:")
-    add_line("        write_output()")
+    add_line("    main()")
+    add_line("    write_output()")
 
     return lines, metadata_entries
 

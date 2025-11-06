@@ -163,6 +163,7 @@ def generate_case_specific_codes(case, code_dir: Optional[Path] = None):
         print(f"\t↳ Saved case-specific code to {output_path}")
     return output_path
 
+# python case_specific_code_builder.py --code-dir /Users/taeyoonkwack/Documents/code_as_auditors/method/outputs/legal_code_output/20251105_222407_5_5mini_10
 def main():
     global ANSWER_MODEL, NUM_TEST_DATA, CODE_DIR, OUTPUT_DIR
 

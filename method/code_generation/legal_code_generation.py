@@ -1,8 +1,10 @@
 import argparse
 import json
 import sys
+import statistics
 from datetime import datetime
 from pathlib import Path
+from collections import defaultdict
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
@@ -409,6 +411,7 @@ Return only the improved JSON based on the Evaluation Feedback.
 
 def generate_single(law_data, variables):
     log_messages = []
+    feedback_history = []
 
     def record(message):
         log_messages.append(message)
@@ -433,6 +436,17 @@ def generate_single(law_data, variables):
         def _format_score(value):
             return "-" if value is None else str(value)
 
+        loop_scores = {}
+        if isinstance(scores, dict):
+            loop_scores = {key: value for key, value in scores.items()}
+
+        feedback_history.append(
+            {
+                "loop_index": i,
+                "scores": loop_scores,
+            }
+        )
+
         score_text = ", ".join(
             [
                 f"code: {_format_score(scores.get('code'))}",
@@ -448,7 +462,10 @@ def generate_single(law_data, variables):
 
         if "No major issues found" in summary_text:
             record("\t↳ No Major Issues Found")
-            return current_result, log_messages
+            return current_result, log_messages, {
+                "feedback_loops": len(feedback_history),
+                "loop_scores": feedback_history,
+            }
 
         current_result = regeneration_with_feedback(
             law_data, current_result, current_feedback, variables
@@ -457,7 +474,10 @@ def generate_single(law_data, variables):
 
     record(f"\t↳ Max iteration ({MAX_FEEDBACK_LOOP}) finished")
     if not evaluated_results:
-        return current_result, log_messages
+        return current_result, log_messages, {
+            "feedback_loops": len(feedback_history),
+            "loop_scores": feedback_history,
+        }
 
     def score_tuple(entry):
         scores = {}
@@ -471,7 +491,10 @@ def generate_single(law_data, variables):
         )
     
     best_entry = max(evaluated_results, key=score_tuple)
-    return best_entry["result"], log_messages
+    return best_entry["result"], log_messages, {
+        "feedback_loops": len(feedback_history),
+        "loop_scores": feedback_history,
+    }
 
 def generate_article_list(article_list=ARTICLES):
     variables = base_variables
@@ -488,17 +511,54 @@ def generate_article_list(article_list=ARTICLES):
         if isinstance(entry, dict) and entry.get("variable")
     }
     log_entries = []
+    stats_tracker = {
+        "loop_counts": [],
+        "scores_by_loop": defaultdict(lambda: defaultdict(list)),
+        "all_scores": defaultdict(list),
+    }
 
     def record(message):
         log_entries.append(message)
         if DEBUG:
             print(message)
 
+    def _to_float(value):
+        if isinstance(value, (int, float)):
+            return float(value)
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+
     for index, law_data in enumerate(datalist, start=1):
         law_id = law_data.get("id")
         record(f"[{index}/{total_count}] Processing {law_id}")
-        generation_result, single_logs = generate_single(law_data, variables)
+        generation_result, single_logs, single_stats = generate_single(law_data, variables)
         log_entries.extend(single_logs)
+
+        if isinstance(single_stats, dict):
+            loop_count = single_stats.get("feedback_loops")
+            if isinstance(loop_count, int):
+                stats_tracker["loop_counts"].append(loop_count)
+
+            loop_scores = single_stats.get("loop_scores") or []
+            if isinstance(loop_scores, list):
+                for loop_entry in loop_scores:
+                    if not isinstance(loop_entry, dict):
+                        continue
+                    loop_index = loop_entry.get("loop_index")
+                    if loop_index is None:
+                        continue
+                    scores = loop_entry.get("scores") or {}
+                    if not isinstance(scores, dict):
+                        continue
+                    metric_bucket = stats_tracker["scores_by_loop"][loop_index]
+                    for metric_name, raw_value in scores.items():
+                        numeric_value = _to_float(raw_value)
+                        if numeric_value is None:
+                            continue
+                        metric_bucket[metric_name].append(numeric_value)
+                        stats_tracker["all_scores"][metric_name].append(numeric_value)
 
         pseudocode = generation_result.get("pseudocode") if isinstance(generation_result, dict) else None
         added_variables = generation_result.get("added_variables") if isinstance(generation_result, dict) else []
@@ -518,7 +578,16 @@ def generate_article_list(article_list=ARTICLES):
                     variables.append(variable_entry)
                     existing_variables.add(variable_entry["variable"])
 
-    return processed_laws, variables, log_entries
+    stats_output = {
+        "loop_counts": list(stats_tracker["loop_counts"]),
+        "scores_by_loop": {
+            loop_idx: dict(metric_map)
+            for loop_idx, metric_map in stats_tracker["scores_by_loop"].items()
+        },
+        "all_scores": dict(stats_tracker["all_scores"]),
+    }
+
+    return processed_laws, variables, log_entries, stats_output
 
 def main(
     article_list=ARTICLES,
@@ -539,7 +608,7 @@ def main(
             raise ValueError("max_feedback_loop must be a positive integer.")
         MAX_FEEDBACK_LOOP = max_feedback_loop
 
-    processed_laws, variables, log_entries = generate_article_list(article_list=article_list)
+    processed_laws, variables, log_entries, stats_output = generate_article_list(article_list=article_list)
     output_dir_path = _resolve_output_dir(output_dir or DEFAULT_OUTPUT_DIR)
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -557,8 +626,69 @@ def main(
     with variables_path.open("w", encoding="utf-8") as variables_file:
         json.dump(variables, variables_file, ensure_ascii=False, indent=2)
 
+    def _format_stat_line(label, values):
+        if not values:
+            return f"{label}: mean=N/A, std=N/A, n=0"
+        mean_value = statistics.mean(values)
+        std_value = statistics.stdev(values) if len(values) > 1 else 0.0
+        return f"{label}: mean={mean_value:.3f}, std={std_value:.3f}, n={len(values)}"
+
+    loop_counts = stats_output.get("loop_counts") or []
+    loop_mean = statistics.mean(loop_counts) if loop_counts else None
+    overall_scores = stats_output.get("all_scores") or {}
+    overall_mean_scores = {
+        metric_name: statistics.mean(values)
+        for metric_name, values in overall_scores.items()
+        if values
+    }
+
+    summary_lines = []
+    if loop_mean is not None:
+        summary_lines.append(f"Average feedback loops: {loop_mean:.3f}")
+    else:
+        summary_lines.append("Average feedback loops: N/A")
+
+    if overall_mean_scores:
+        metrics_summary = ", ".join(
+            f"{metric_name}={overall_mean_scores[metric_name]:.3f}"
+            for metric_name in sorted(overall_mean_scores)
+        )
+        summary_lines.append(f"Overall average scores: {metrics_summary}")
+    else:
+        summary_lines.append("Overall average scores: N/A")
+    summary_lines.append("")
+
+    summary_lines.append("Feedback Loop Statistics")
+    summary_lines.append(_format_stat_line("feedback_loop_count", loop_counts))
+    summary_lines.append("")
+
+    loop_scores = stats_output.get("scores_by_loop") or {}
+    for loop_index in sorted(loop_scores):
+        summary_lines.append(f"Loop {loop_index} Scores")
+        metrics = loop_scores[loop_index] or {}
+        if metrics:
+            for metric_name in sorted(metrics):
+                summary_lines.append(
+                    _format_stat_line(f"- {metric_name}", metrics[metric_name])
+                )
+        else:
+            summary_lines.append("- No numeric score data")
+        summary_lines.append("")
+
+    summary_lines.append("Overall Scores")
+    if overall_scores:
+        for metric_name in sorted(overall_scores):
+            summary_lines.append(
+                _format_stat_line(f"- {metric_name}", overall_scores[metric_name])
+            )
+    else:
+        summary_lines.append("- No numeric score data")
+    summary_lines.append("")
+
+    all_log_lines = summary_lines + log_entries
+
     with log_path.open("w", encoding="utf-8") as log_file:
-        log_file.write("\n".join(log_entries))
+        log_file.write("\n".join(all_log_lines))
 
     metadata_payload = {
         "GENERATION_LLM": GENERATION_LLM,
