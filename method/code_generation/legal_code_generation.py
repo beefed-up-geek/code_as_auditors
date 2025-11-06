@@ -168,11 +168,11 @@ Rules:
 - Example variable names: 
    - LAW_A15_P1 : Article 15(1) of the Personal Information Protection Act 
    - LAW_A15_P1_S2 : Article 15(1)(ii) of the Personal Information Protection Act 
-- action_pseudocode is only used when encoding interactions or dependencies between articles. 
+- action_pseudocode is only used when state of other articles has to be changed. 
 - Variable names must be written in uppercase English, with up to four words separated by underscores. 
 - Questions must not contain any content from the law itself, but must instead be **specific, concrete questions** about business practices. 
 
-Below are examples of how PIPA articles are encoded in JSON.  
+Below are examples of how PIPA articles are encoded in JSON.
 In these examples, if legal_pseudocode is False, it is regarded as a “violation.” (True → compliance)
 
 [Examples]
@@ -218,7 +218,7 @@ It consists of two main components:
    - **action_pseudocode**: optional logic describing inter-article actions or effects when the condition is True.  
 
 2. **added_variables** – defines new Boolean variables used in the pseudocode, each accompanied by:  
-   - **variable**: an uppercase English identifier (≤4 words, separated by underscores).  
+   - **variable**: an uppercase English identifier with intuitive names(≤4 words, separated by underscores).  
    - **question**: a concrete Yes/No question about real business behavior, written without quoting or paraphrasing the legal text.  
 
 [Examples of generated JSON]
@@ -240,7 +240,8 @@ Evaluate the generated result according to the following four criteria.
 
 2. Specificity & Clarity  
    Each variable’s question must be specific, must not quote or paraphrase the law, and must clearly assess an actual business activity.  
-   - Does the question avoid vague words like “procedure,” “legality,” “reasonable,” or “related measures”?  
+   - Does the question avoid vague words like “procedure,” “legality,” “reasonable,” or “related measures”? 
+   - Can the meaning of each variable be easily understood from its name?
    - Does it focus on business conduct rather than legal text?  
    - Can it be answered with a clear Yes/No?
 
@@ -248,7 +249,7 @@ Evaluate the generated result according to the following four criteria.
      - Incorrect: “Has your company complied with the data collection procedure?” → vague (“procedure” undefined)  
      - Fix: “When collecting personal information, does your company clearly notify the data subject of the purpose and items collected?”
 
-3. Logical Completeness  
+3. Logical Completeness
    - Assess whether each pseudocode faithfully reflects the logical structure of the article and maintains consistency without logical errors.  
    - Consider whether the pseudocode could fail to identify a violation in a hypothetical case, and specify how to improve it.
   **Example**

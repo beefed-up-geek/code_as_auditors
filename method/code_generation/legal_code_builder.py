@@ -365,7 +365,7 @@ def parse_cli_arguments(argv: Optional[List[str]] = None) -> argparse.Namespace:
     )
     return parser.parse_args(argv)
 
-
+# 예시 python -m method.code_generation.legal_code_builder -d method/outputs/legal_code_output/20251105_010712_5_5mini_15
 def main(argv: Optional[List[str]] = None):
     args = parse_cli_arguments(argv)
     target_dir = Path(args.directory).expanduser().resolve() if args.directory else None

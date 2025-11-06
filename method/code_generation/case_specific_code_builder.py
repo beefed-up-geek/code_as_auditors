@@ -22,7 +22,7 @@ CODE_DIR = METHOD_DIR / "outputs" / "legal_code_output" / CODE_DIR_NAME
 OUTPUT_DIR = METHOD_DIR / "outputs" / "case_code_output"
 ANSWER_MODEL = "gpt-5-nano"
 RANDOM_SEED = 42
-NUM_TEST_DATA = 30
+NUM_TEST_DATA = 15
 DEBUG = True
 
 def tick_checklist(case: str, checklist: str):
@@ -207,7 +207,11 @@ def main():
 
     cases = get_case_data()
     print(f"Loaded {len(cases)} cases from {CASE_PATH}")
-    generate_case_specific_codes(cases[0])
+    print(f"Loaded {len(cases)} cases from {CASE_PATH}")
+    for i in range(len(cases)):
+        print(f"Building Code for {i}/{len(cases)}")
+        generate_case_specific_codes(cases[i])
 
 if __name__ == "__main__":
     main()
+
