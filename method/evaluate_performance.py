@@ -4,7 +4,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from statistics import mean, pstdev
+from statistics import mean, stdev
 from typing import Any, Dict, List, Optional, Set
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -243,6 +243,7 @@ def case_code_evaluation_result(
         target_dirs = [base_path]
 
     result_paths: List[Path] = []
+    run_summaries: List[Dict[str, Any]] = []
 
     for target_dir in target_dirs:
         results: List[Dict[str, Any]] = []
@@ -268,23 +269,37 @@ def case_code_evaluation_result(
             recall_values = [item["recall"] for item in results]
             f1_values = [item["f1"] for item in results]
 
-            def _mean_std(values: List[float]) -> Dict[str, float]:
-                average = mean(values)
-                std_dev = pstdev(values) if len(values) > 1 else 0.0
-                return {"mean": average, "std": std_dev}
-
-            stats = {
-                "precision": _mean_std(precision_values),
-                "recall": _mean_std(recall_values),
-                "f1": _mean_std(f1_values),
-                "evaluated_cases": len(results),
+            macro_metrics = {
+                "precision": mean(precision_values),
+                "recall": mean(recall_values),
+                "f1": mean(f1_values),
             }
+            case_level_stds = {
+                "precision": stdev(precision_values) if len(precision_values) > 1 else 0.0,
+                "recall": stdev(recall_values) if len(recall_values) > 1 else 0.0,
+                "f1": stdev(f1_values) if len(f1_values) > 1 else 0.0,
+            }
+
+            run_summaries.append(
+                {
+                    "run_dir": target_dir,
+                    "evaluated_cases": len(results),
+                    "macro": macro_metrics,
+                }
+            )
+
             output_lines.extend(
                 [
-                    f"Evaluated cases: {stats['evaluated_cases']}",
-                    f"* Precision mean: {stats['precision']['mean']:.4f}, std: {stats['precision']['std']:.4f}",
-                    f"* Recall mean: {stats['recall']['mean']:.4f}, std: {stats['recall']['std']:.4f}",
-                    f"* F1 Score mean: {stats['f1']['mean']:.4f}, std: {stats['f1']['std']:.4f}",
+                    f"Evaluated cases: {len(results)}",
+                    "Macro metrics (mean across cases):",
+                    f"* Precision: {macro_metrics['precision']:.4f}",
+                    f"* Recall: {macro_metrics['recall']:.4f}",
+                    f"* F1 Score: {macro_metrics['f1']:.4f}",
+                    "",
+                    "Case-level variation (std across cases):",
+                    f"* Precision std: {case_level_stds['precision']:.4f}",
+                    f"* Recall std: {case_level_stds['recall']:.4f}",
+                    f"* F1 Score std: {case_level_stds['f1']:.4f}",
                 ]
             )
         else:
@@ -306,6 +321,45 @@ def case_code_evaluation_result(
             print(f"[RESULT] {target_dir}")
             for line in output_lines:
                 print(line)
+
+    aggregate_lines: List[str] = []
+    successful_runs = len(run_summaries)
+    total_runs = len(target_dirs)
+
+    def _mean_std(values: List[float]) -> Dict[str, float]:
+        avg = mean(values)
+        std_dev = stdev(values) if len(values) > 1 else 0.0
+        return {"mean": avg, "std": std_dev}
+
+    if run_summaries:
+        precision_means = [summary["macro"]["precision"] for summary in run_summaries]
+        recall_means = [summary["macro"]["recall"] for summary in run_summaries]
+        f1_means = [summary["macro"]["f1"] for summary in run_summaries]
+
+        precision_stats = _mean_std(precision_means)
+        recall_stats = _mean_std(recall_means)
+        f1_stats = _mean_std(f1_means)
+
+        aggregate_lines.extend(
+            [
+                "Aggregated run metrics (macro means across cases):",
+                f"Runs aggregated: {successful_runs} / {total_runs}",
+                f"* Precision mean: {precision_stats['mean']:.4f}, std over runs: {precision_stats['std']:.4f}",
+                f"* Recall mean: {recall_stats['mean']:.4f}, std over runs: {recall_stats['std']:.4f}",
+                f"* F1 Score mean: {f1_stats['mean']:.4f}, std over runs: {f1_stats['std']:.4f}",
+            ]
+        )
+    else:
+        aggregate_lines.append("No successful runs to aggregate.")
+
+    aggregate_result_path = base_path / "_aggregate_result.txt"
+    aggregate_result_path.write_text("\n".join(aggregate_lines) + "\n", encoding="utf-8")
+    result_paths.append(aggregate_result_path)
+
+    if DEBUG:
+        print("[RESULT] Aggregated metrics")
+        for line in aggregate_lines:
+            print(line)
 
     return result_paths
 

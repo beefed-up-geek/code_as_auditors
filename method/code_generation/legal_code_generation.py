@@ -21,13 +21,13 @@ from method.utils.llm_interface import llm_response
 DEBUG = True
 DEFAULT_GENERATION_LLM = "gpt-5-mini"
 DEFAULT_FEEDBACK_LLM = "gpt-5"
-DEFAULT_MAX_FEEDBACK_LOOP = 15
+DEFAULT_MAX_FEEDBACK_LOOP = 5
 DEFAULT_OUTPUT_DIR = (Path(__file__).resolve().parent / "../outputs/legal_code_output").resolve()
 
 GENERATION_LLM = DEFAULT_GENERATION_LLM
 FEEDBACK_LLM = DEFAULT_FEEDBACK_LLM
 MAX_FEEDBACK_LOOP = DEFAULT_MAX_FEEDBACK_LOOP
-ARTICLES = ["제21조", "제24조", "제24조의2", "제26조", "제29조", "제34조", "제39조의4"] #["제29조", "제26조"] # ["제29조", "제26조", "제34조", "제21조", "제24조의2", "제39조의4", "제24조"]
+ARTICLES = ["제24조"] #["제29조", "제26조"] # ["제29조", "제26조", "제34조", "제21조", "제24조의2", "제39조의4", "제24조"]
 base_variables = [
         {
             "variable": "BUSINESS_USES_PERSONAL_INFORMATION",
@@ -75,6 +75,7 @@ fewshot_examples = """
     "added_variables": []
   }
 
+  제15조 제3항: 개인정보처리자는 당초 수집 목적과 합리적으로 관련된 범위에서 정보주체에게 불이익이 발생하는지 여부, 암호화 등 안전성 확보에 필요한 조치를 하였는지 여부 등을 고려하여 대통령령으로 정하는 바에 따라 정보주체의 동의없이 개인정보를 이용할 수 있다.
   {
   "pseudocode": {
     "condition_pseudocode": "USE_WITHOUT_CONSENT and RELATED_TO_ORIGINAL_PURPOSE and SAFETY_MEASURES_TAKEN and NO_DISADVANTAGE_TO_SUBJECT",

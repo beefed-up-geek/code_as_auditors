@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, List, Set
 
 LAW_DATASET_PATH = (
-    Path(__file__).resolve().parents[2] / "dataset" / "PIPA" / "law" / "law.json"
+    Path(__file__).resolve().parents[2] / "dataset" / "PIPA" / "law" / "law_LRX.json"
 )
 
 _ARTICLE_ID_PATTERN = re.compile(r"(제\d+조(?:의\d+)?)")
