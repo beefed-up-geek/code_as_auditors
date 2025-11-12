@@ -20,9 +20,9 @@ CASE_PATH = PROJECT_ROOT / "dataset/PIPA/cases/cases.jsonl"
 CODE_DIR_NAME = "20251104_184338_5_5_5"
 CODE_DIR = METHOD_DIR / "outputs" / "legal_code_output" / CODE_DIR_NAME
 OUTPUT_DIR = METHOD_DIR / "outputs" / "case_code_output"
-ANSWER_MODEL = "gpt-5-nano"
+ANSWER_MODEL = "gpt-5"
 RANDOM_SEED = 42
-NUM_TEST_DATA = 15
+NUM_TEST_DATA = 20
 DEBUG = True
 
 def tick_checklist(case: str, checklist: str):

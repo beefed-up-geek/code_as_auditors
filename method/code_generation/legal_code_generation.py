@@ -27,7 +27,7 @@ DEFAULT_OUTPUT_DIR = (Path(__file__).resolve().parent / "../outputs/legal_code_o
 GENERATION_LLM = DEFAULT_GENERATION_LLM
 FEEDBACK_LLM = DEFAULT_FEEDBACK_LLM
 MAX_FEEDBACK_LOOP = DEFAULT_MAX_FEEDBACK_LOOP
-ARTICLES = ["제24조"] #["제29조", "제26조"] # ["제29조", "제26조", "제34조", "제21조", "제24조의2", "제39조의4", "제24조"]
+ARTICLES = ["제21조"] #["제29조", "제26조"] # ["제29조", "제26조", "제34조", "제21조", "제24조의2", "제39조의4", "제24조"]
 base_variables = [
         {
             "variable": "BUSINESS_USES_PERSONAL_INFORMATION",
@@ -98,6 +98,24 @@ fewshot_examples = """
     {
       "variable": "NO_DISADVANTAGE_TO_SUBJECT",
       "question": "추가 이용으로 인해 정보주체에게 불이익이 발생하지 않도록 보장하고 있습니까?"
+    }
+  ]
+}
+    제24조 제1항: 개인정보처리자는 다음 각 호의 경우를 제외하고는 법령에 따라 개인을 고유하 게 구별하기 위하여 부여된 식별정보로서 대통령령으로 정하는 정보(이하 “고유식별정보”라 한다)를 처리할 수 없다.
+    {
+  "pseudocode": {
+      "condition_pseudocode": "BUSINESS_PROCESSES_UNIQUE_IDENTIFIERS",
+      "legal_pseudocode": "LAW_A24_P1_S1['condition'] or LAW_A24_P1_S2['condition']or BUSINESS_OBTAINED_SEPARATE_CONSENT_AND_NOTICE or BUSINESS_PROCESSING_REQUIRED_BY_STATUTE",
+      "action_pseudocode": ""
+    },
+  "added_variables": [
+    {
+      "variable": "BUSINESS_OBTAINED_SEPARATE_CONSENT_AND_NOTICE",
+      "question": "귀사는 해당 고유식별정보를 처리하기 전에 정보주체에게 별도의 고지와 동의를 받았습니까?"
+    },
+    {
+      "variable": "BUSINESS_PROCESSING_REQUIRED_BY_STATUTE",
+      "question": "귀사의 고유식별정보 처리는 법률이나 명령에 의해 명시적으로 요구되거나 허용됩니까?"
     }
   ]
 }
