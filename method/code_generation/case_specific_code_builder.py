@@ -30,8 +30,10 @@ def tick_checklist(case: str, checklist: str):
     You will be given a business case text and a question.
     Understand the text and answer the question.
     If the given text does not include the answer to the question, answer true or false in the direction of legality.
-    Answer only True or False according to the JSON format below.
+    Provide your answer and briefly explain the key evidence supporting it.
+    Respond strictly in the JSON format below.
     {
+        "reason": "Short explanation citing the decisive facts",
         "answer": True or False
     }'''
 
@@ -44,7 +46,16 @@ def tick_checklist(case: str, checklist: str):
     [Answer in JSON format]'''
 
     result = llm_response(ANSWER_MODEL, sys_prompt, usr_prompt)
-    return result["answer"]
+    answer_raw = result.get("answer")
+    reason_text = str(result.get("reason", "")).strip()
+
+    if isinstance(answer_raw, str):
+        normalized = answer_raw.strip().lower()
+        answer_bool = normalized == "true"
+    else:
+        answer_bool = bool(answer_raw)
+
+    return answer_bool, reason_text
 
 def get_case_data(num: Optional[int] = None):
     if num is None:
@@ -114,6 +125,17 @@ def generate_case_specific_codes(case, code_dir: Optional[Path] = None):
     checklist_cache = {}
     processed_count = 0
 
+    def format_reason_comment(indent: str, reason: str) -> str:
+        clean_reason = (reason or "").strip()
+        if not clean_reason:
+            clean_reason = "LLM did not provide a reason."
+        reason_lines = clean_reason.splitlines() or [clean_reason]
+        formatted = []
+        for idx, line in enumerate(reason_lines):
+            prefix = "# reason: " if idx == 0 else "#          "
+            formatted.append(f"{indent}{prefix}{line.strip()}")
+        return "\n".join(formatted)
+
     def replace_var(match: re.Match) -> str:
         nonlocal processed_count
         question = match.group("question")
@@ -126,23 +148,29 @@ def generate_case_specific_codes(case, code_dir: Optional[Path] = None):
         question_key = question.strip()
         if question_key not in checklist_cache:
             try:
-                answer = tick_checklist(checklist_context, question_key)
+                answer_bool, reason_text = tick_checklist(checklist_context, question_key)
                 if DEBUG:
-                    print(f"\t↳ Processing checklist variable {processed_count}/{total_checklist_vars}: {var_name} = {answer}")
+                    reason_preview = (reason_text[:60] + "...") if len(reason_text) > 60 else reason_text
+                    print(
+                        f"\t↳ Processing checklist variable {processed_count}/{total_checklist_vars}: "
+                        f"{var_name} = {answer_bool} | reason: {reason_preview}"
+                    )
             except Exception as exc:  # pragma: no cover - defensive fallback
                 if DEBUG:
                     print(f"\t↳[warning] tick_checklist failed for {var_name}: {exc}")
-                answer = False
-            if isinstance(answer, str):
-                normalized = answer.strip().lower()
-                answer_bool = normalized == "true"
-            else:
-                answer_bool = bool(answer)
-            checklist_cache[question_key] = answer_bool
+                answer_bool = False
+                reason_text = f"tick_checklist failed: {exc}"
+            checklist_cache[question_key] = {
+                "answer": answer_bool,
+                "reason": reason_text,
+            }
 
-        answer_bool = checklist_cache[question_key]
-        bool_literal = "True" if answer_bool else "False"
-        return f"{match.group('indent')}{var_name} = {bool_literal}{match.group('suffix') or ''}"
+        cached_entry = checklist_cache[question_key]
+        bool_literal = "True" if cached_entry["answer"] else "False"
+        indent = match.group("indent")
+        suffix = match.group("suffix") or ""
+        reason_comment = format_reason_comment(indent, cached_entry["reason"])
+        return f"{indent}{var_name} = {bool_literal}{suffix}\n{reason_comment}"
 
     updated_body = var_pattern.sub(replace_var, checklist_body)
     updated_text = (
@@ -215,4 +243,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
