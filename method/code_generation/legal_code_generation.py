@@ -27,11 +27,11 @@ DEFAULT_OUTPUT_DIR = (Path(__file__).resolve().parent / "../outputs/legal_code_o
 GENERATION_LLM = DEFAULT_GENERATION_LLM
 FEEDBACK_LLM = DEFAULT_FEEDBACK_LLM
 MAX_FEEDBACK_LOOP = DEFAULT_MAX_FEEDBACK_LOOP
-ARTICLES = ["제21조"] #["제29조", "제26조"] # ["제29조", "제26조", "제34조", "제21조", "제24조의2", "제39조의4", "제24조"]
+ARTICLES = ["제22조", "제24조"] #["제29조", "제26조"] # ["제29조", "제26조", "제34조", "제21조", "제24조의2", "제39조의4", "제24조"]
 base_variables = [
         {
             "variable": "BUSINESS_USES_PERSONAL_INFORMATION",
-            "question": "귀사는 고객 또는 이용자의 개인정보를 처리하거나 보유합니까?"
+            "question": "귀사는 개인정보를 처리합니까?"
         },
         {
             "variable": "BUSINESS_OUTSOURCES_PROCESSING",
