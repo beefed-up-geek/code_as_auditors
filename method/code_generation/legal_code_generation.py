@@ -172,7 +172,7 @@ Each article must include the following fields:
     - variable: a Boolean variable (True/False) representing a specific characteristic of a business 
     - question: a concrete question corresponding to the variable, allowing one to determine whether a business violates the law.  
       It must **never** quote or describe the legal text itself. 
- 
+
 Rules: 
 - Every Chapter, Section, Article, Paragraph, and Subparagraph of the law must have two logical variables: 
    - condition: whether the article is applicable (True/False) 
